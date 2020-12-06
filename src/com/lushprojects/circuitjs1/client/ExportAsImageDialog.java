@@ -19,47 +19,43 @@
 
 package com.lushprojects.circuitjs1.client;
 
-import java.util.Date;
-import com.google.gwt.user.client.ui.DialogBox;
-import com.google.gwt.user.client.ui.Anchor;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.i18n.client.DateTimeFormat;
+import com.google.gwt.user.client.ui.*;
+
+import java.util.Date;
 
 public class ExportAsImageDialog extends DialogBox {
-	
-	VerticalPanel vp;
-	
-	public ExportAsImageDialog() {
-		super();
-		Button okButton;
-		Anchor a;
-		vp=new VerticalPanel();
-		setWidget(vp);
-		setText(CirSim.LS("Export as Image"));
-		vp.add(new Label(CirSim.LS("Click on the link below to save your image")));
-		Date date = new Date();
-		DateTimeFormat dtf = DateTimeFormat.getFormat("yyyyMMdd-HHmm");
-		String dataURL = CirSim.theSim.getCircuitAsCanvas(false).toDataUrl();
-		a=new Anchor("image.png", dataURL);
-		String fname = "circuit-"+ dtf.format(date) + ".png";
-		a.getElement().setAttribute("Download", fname);
-		vp.add(a);
-		vp.add(okButton = new Button(CirSim.LS("OK")));
-		okButton.addClickHandler(new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				closeDialog();
-			}
-		});
-		this.center();
-	}
-	
-	protected void closeDialog()
-	{
-		this.hide();
-	}
+
+    VerticalPanel vp;
+
+    public ExportAsImageDialog() {
+        super();
+        Button okButton;
+        Anchor a;
+        vp = new VerticalPanel();
+        setWidget(vp);
+        setText(CirSim.LS("Export as Image"));
+        vp.add(new Label(CirSim.LS("Click on the link below to save your image")));
+        Date date = new Date();
+        DateTimeFormat dtf = DateTimeFormat.getFormat("yyyyMMdd-HHmm");
+        String dataURL = CirSim.theSim.getCircuitAsCanvas(false).toDataUrl();
+        a = new Anchor("image.png", dataURL);
+        String fname = "circuit-" + dtf.format(date) + ".png";
+        a.getElement().setAttribute("Download", fname);
+        vp.add(a);
+        vp.add(okButton = new Button(CirSim.LS("OK")));
+        okButton.addClickHandler(new ClickHandler() {
+            public void onClick(ClickEvent event) {
+                closeDialog();
+            }
+        });
+        this.center();
+    }
+
+    protected void closeDialog() {
+        this.hide();
+    }
 
 }

@@ -23,72 +23,94 @@ import com.google.gwt.storage.client.Storage;
 import com.google.gwt.user.client.Window;
 
 class EditOptions implements Editable {
-	CirSim sim;
-	
-	public EditOptions(CirSim s) { sim = s; }
-	
-	public EditInfo getEditInfo(int n) {
-		if (n == 0)
-			return new EditInfo("Time step size (s)", sim.timeStep, 0, 0);
-		if (n == 1)
-			return new EditInfo("Range for voltage color (V)",
-					CircuitElm.voltageRange, 0, 0);
-		if (n == 2) {
-	            EditInfo ei =  new EditInfo("Change Language", 0, -1, -1);
-	            ei.choice = new Choice();
-	            ei.choice.add("(no change)");
-	            ei.choice.add("Dansk");
-	            ei.choice.add("Deutsch");
-	            ei.choice.add("English");
-	            ei.choice.add("Español");
-	            ei.choice.add("Français");
-	            ei.choice.add("Italiano");
-	            ei.choice.add("Norsk bokmål");
-	            ei.choice.add("Polski");
-	            ei.choice.add("Português");
-	            ei.choice.add("\u0420\u0443\u0441\u0441\u043a\u0438\u0439"); // Russian 
-	            return ei;
-		}
+    CirSim sim;
 
-		return null;
-	}
-	
-	public void setEditValue(int n, EditInfo ei) {
-		if (n == 0 && ei.value > 0) {
-			sim.timeStep = ei.value;
+    public EditOptions(CirSim s) {
+        sim = s;
+    }
 
-			// if timestep changed manually, prompt before changing it again
-			AudioOutputElm.okToChangeTimeStep = false;
-		}
-		if (n == 1 && ei.value > 0)
-			CircuitElm.voltageRange = ei.value;
-		if (n == 2) {
-		    	int lang = ei.choice.getSelectedIndex();
-		    	if (lang == 0)
-		    	    return;
-		    	String langString = null;
-		    	switch (lang) {
-		    	case 1: langString = "da"; break;
-		    	case 2: langString = "de"; break;
-		    	case 3: langString = "en"; break;
-		    	case 4: langString = "es"; break;
-		    	case 5: langString = "fr"; break;
-		    	case 6: langString = "it"; break;
-		    	case 7: langString = "nb"; break;
-		    	case 8: langString = "pl"; break;
-			case 9: langString = "pt"; break;
-		    	case 10: langString = "ru"; break;
-		    	}
-		    	if (langString == null)
-		    	    return;
-		        Storage stor = Storage.getLocalStorageIfSupported();
-		        if (stor == null) {
-		            Window.alert(sim.LS("Can't set language"));
-		            return;
-		        }
-		        stor.setItem("language", langString);
-		        if (Window.confirm(sim.LS("Must restart to set language.  Restart now?")))
-		            Window.Location.reload();
-		}
-	}
+    public EditInfo getEditInfo(int n) {
+        if (n == 0)
+            return new EditInfo("Time step size (s)", sim.timeStep, 0, 0);
+        if (n == 1)
+            return new EditInfo("Range for voltage color (V)",
+                    CircuitElm.voltageRange, 0, 0);
+        if (n == 2) {
+            EditInfo ei = new EditInfo("Change Language", 0, -1, -1);
+            ei.choice = new Choice();
+            ei.choice.add("(no change)");
+            ei.choice.add("Dansk");
+            ei.choice.add("Deutsch");
+            ei.choice.add("English");
+            ei.choice.add("Español");
+            ei.choice.add("Français");
+            ei.choice.add("Italiano");
+            ei.choice.add("Norsk bokmål");
+            ei.choice.add("Polski");
+            ei.choice.add("Português");
+            ei.choice.add("\u0420\u0443\u0441\u0441\u043a\u0438\u0439"); // Russian
+            return ei;
+        }
+
+        return null;
+    }
+
+    public void setEditValue(int n, EditInfo ei) {
+        if (n == 0 && ei.value > 0) {
+            sim.timeStep = ei.value;
+
+            // if timestep changed manually, prompt before changing it again
+            AudioOutputElm.okToChangeTimeStep = false;
+        }
+        if (n == 1 && ei.value > 0)
+            CircuitElm.voltageRange = ei.value;
+        if (n == 2) {
+            int lang = ei.choice.getSelectedIndex();
+            if (lang == 0)
+                return;
+            String langString = null;
+            switch (lang) {
+                case 1:
+                    langString = "da";
+                    break;
+                case 2:
+                    langString = "de";
+                    break;
+                case 3:
+                    langString = "en";
+                    break;
+                case 4:
+                    langString = "es";
+                    break;
+                case 5:
+                    langString = "fr";
+                    break;
+                case 6:
+                    langString = "it";
+                    break;
+                case 7:
+                    langString = "nb";
+                    break;
+                case 8:
+                    langString = "pl";
+                    break;
+                case 9:
+                    langString = "pt";
+                    break;
+                case 10:
+                    langString = "ru";
+                    break;
+            }
+            if (langString == null)
+                return;
+            Storage stor = Storage.getLocalStorageIfSupported();
+            if (stor == null) {
+                Window.alert(sim.LS("Can't set language"));
+                return;
+            }
+            stor.setItem("language", langString);
+            if (Window.confirm(sim.LS("Must restart to set language.  Restart now?")))
+                Window.Location.reload();
+        }
+    }
 };

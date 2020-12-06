@@ -19,26 +19,40 @@
 
 package com.lushprojects.circuitjs1.client;
 
-    // concrete subclass of ChipElm that can be used by other elements (like CustomCompositeElm) to draw chips.
-    // CustomCompositeElm can't be a subclass of both ChipElm and CompositeElm.
-    class CustomCompositeChipElm extends ChipElm {
-	public CustomCompositeChipElm(int xx, int yy) {
-	    super(xx, yy);
-	    setSize(2);
-	}
-	boolean needsBits() { return false; }
-	void setupPins() { }
-	int getVoltageSourceCount() { return 0; }
-	void setPins(Pin p[]) {
-	    pins = p;
-	}
-	void allocPins(int n) {
-	    pins = new Pin[n];
-	}
-	void setPin(int n, int p, int s, String t) {
-	    pins[n] = new Pin(p, s, t);
-	    pins[n].fixName();
-	}
-	int getPostCount() { return pins == null ? 1 : pins.length; }
+// concrete subclass of ChipElm that can be used by other elements (like CustomCompositeElm) to draw chips.
+// CustomCompositeElm can't be a subclass of both ChipElm and CompositeElm.
+class CustomCompositeChipElm extends ChipElm {
+    public CustomCompositeChipElm(int xx, int yy) {
+        super(xx, yy);
+        setSize(2);
     }
+
+    boolean needsBits() {
+        return false;
+    }
+
+    void setupPins() {
+    }
+
+    int getVoltageSourceCount() {
+        return 0;
+    }
+
+    void setPins(Pin p[]) {
+        pins = p;
+    }
+
+    void allocPins(int n) {
+        pins = new Pin[n];
+    }
+
+    void setPin(int n, int p, int s, String t) {
+        pins[n] = new Pin(p, s, t);
+        pins[n].fixName();
+    }
+
+    int getPostCount() {
+        return pins == null ? 1 : pins.length;
+    }
+}
 

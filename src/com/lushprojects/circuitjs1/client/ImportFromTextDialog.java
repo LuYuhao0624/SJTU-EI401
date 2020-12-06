@@ -19,70 +19,64 @@
 
 package com.lushprojects.circuitjs1.client;
 
-import com.google.gwt.user.client.ui.DialogBox;
-import com.google.gwt.user.client.ui.TextArea;
-import com.google.gwt.user.client.ui.Button;
-import com.google.gwt.user.client.ui.VerticalPanel;
-import com.google.gwt.user.client.ui.HorizontalPanel;
-import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.user.client.ui.*;
 
 public class ImportFromTextDialog extends DialogBox {
-	
-VerticalPanel vp;
-HorizontalPanel hp;
-CirSim sim;
-// RichTextArea textBox;
-TextArea textArea;
-	
-	public ImportFromTextDialog( CirSim asim) {
-		super();
-		sim=asim;
-		Button okButton, cancelButton;
-		final Checkbox subCheck;
-		vp=new VerticalPanel();
-		setWidget(vp);
-		setText(sim.LS("Import from Text"));
-		vp.add(new Label(sim.LS("Paste the text file for your circuit here...")));
+
+    VerticalPanel vp;
+    HorizontalPanel hp;
+    CirSim sim;
+    // RichTextArea textBox;
+    TextArea textArea;
+
+    public ImportFromTextDialog(CirSim asim) {
+        super();
+        sim = asim;
+        Button okButton, cancelButton;
+        final Checkbox subCheck;
+        vp = new VerticalPanel();
+        setWidget(vp);
+        setText(sim.LS("Import from Text"));
+        vp.add(new Label(sim.LS("Paste the text file for your circuit here...")));
 //		vp.add(textBox = new RichTextArea());
-		vp.add(textArea = new TextArea());
-		textArea.setWidth("300px");
-		textArea.setHeight("200px");
-		vp.add(subCheck = new Checkbox(CirSim.LS("Load Subcircuits Only")));
-		hp = new HorizontalPanel();
-		vp.add(hp);
-		hp.add(okButton = new Button(sim.LS("OK")));
-		okButton.addClickHandler(new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				String s;
-				sim.pushUndo();
-				closeDialog();
+        vp.add(textArea = new TextArea());
+        textArea.setWidth("300px");
+        textArea.setHeight("200px");
+        vp.add(subCheck = new Checkbox(CirSim.LS("Load Subcircuits Only")));
+        hp = new HorizontalPanel();
+        vp.add(hp);
+        hp.add(okButton = new Button(sim.LS("OK")));
+        okButton.addClickHandler(new ClickHandler() {
+            public void onClick(ClickEvent event) {
+                String s;
+                sim.pushUndo();
+                closeDialog();
 //				s=textBox.getHTML();
 //				s=s.replace("<br>", "\r");
-				s=textArea.getText();
-				int flags = 0;
-				if (subCheck.getState())
-				    flags |= CirSim.RC_SUBCIRCUITS | CirSim.RC_RETAIN;
-				if (s!=null) {
-					sim.readCircuit(s, flags);
-					sim.allowSave(false);
-				}
-			}
-		});
-		hp.add(cancelButton = new Button(sim.LS("Cancel")));
-		cancelButton.addClickHandler(new ClickHandler() {
-			public void onClick(ClickEvent event) {
-				closeDialog();
-			}
-		});
-		this.center();
-		show();
-	}
-	
-	protected void closeDialog()
-	{
-		this.hide();
-	}
+                s = textArea.getText();
+                int flags = 0;
+                if (subCheck.getState())
+                    flags |= CirSim.RC_SUBCIRCUITS | CirSim.RC_RETAIN;
+                if (s != null) {
+                    sim.readCircuit(s, flags);
+                    sim.allowSave(false);
+                }
+            }
+        });
+        hp.add(cancelButton = new Button(sim.LS("Cancel")));
+        cancelButton.addClickHandler(new ClickHandler() {
+            public void onClick(ClickEvent event) {
+                closeDialog();
+            }
+        });
+        this.center();
+        show();
+    }
+
+    protected void closeDialog() {
+        this.hide();
+    }
 
 }
