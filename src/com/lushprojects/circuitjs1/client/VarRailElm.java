@@ -48,21 +48,13 @@ import com.google.gwt.event.dom.client.MouseWheelHandler;
 	int getDumpType() { return 172; }
 	void createSlider() {
 	    waveform = WF_VAR;
-	    sim.addWidgetToVerticalPanel(label = new Label(sim.LS(sliderText)));
-	    label.addStyleName("topSpace");
-	    int value = (int) ((frequency-bias)*100/(maxVoltage-bias));
-	    sim.addWidgetToVerticalPanel(slider = new Scrollbar(Scrollbar.HORIZONTAL, value, 1, 0, 101 ,
-	    		null, this));
-//	    sim.verticalPanel.validate();
 	}
 	double getVoltage() {
 	    frequency = slider.getValue() * (maxVoltage-bias) / 100. + bias;
 	    return frequency;
 	}
 	void delete() {
-	    sim.removeWidgetFromVerticalPanel(label);
-	    sim.removeWidgetFromVerticalPanel(slider);
-            super.delete();
+		super.delete();
 	}
 	public EditInfo getEditInfo(int n) {
 	    if (n == 0)
@@ -84,7 +76,6 @@ import com.google.gwt.event.dom.client.MouseWheelHandler;
 	    if (n == 2) {
 		sliderText = ei.textf.getText();
 		label.setText(sim.LS(sliderText));
-		sim.setiFrameHeight();
 	    }
 	}
 	int getShortcut() { return 0; }

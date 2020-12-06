@@ -196,21 +196,8 @@ public class AudioOutputElm extends CircuitElm {
 	    }
 	}
 	
-        void createButton() {
-            String label = "&#9654; " + sim.LS("Play Audio");
-            if (labelNum > 1)
-        	label += " " + labelNum;
-            sim.addWidgetToVerticalPanel(button = new Button(label));
-            button.setStylePrimaryName("topButton");
-            button.addClickHandler(new ClickHandler() {
-        	public void onClick(ClickEvent event) {
-        	    play();
-        	}
-            });
-            
-        }
+        void createButton() { }
         void delete() {
-            sim.removeWidgetFromVerticalPanel(button);
             super.delete();
         }
         

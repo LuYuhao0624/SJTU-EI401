@@ -67,12 +67,7 @@ class PotElm extends CircuitElm implements Command, MouseWheelHandler {
     		position + " " + sliderText; }
     
     void createSlider() {
-    	sim.addWidgetToVerticalPanel(label = new Label(sliderText));
-    	label.addStyleName("topSpace");
-    	int value = (int) (position*100);
-    	sim.addWidgetToVerticalPanel(slider = new Scrollbar(Scrollbar.HORIZONTAL, value, 1, 0, 101, this, this));
-   // 	sim.verticalPanel.validate();
-   // 	slider.addAdjustmentListener(this);
+
     }
     
     public void execute() {
@@ -81,8 +76,6 @@ class PotElm extends CircuitElm implements Command, MouseWheelHandler {
     }
     
     void delete() {
-	sim.removeWidgetFromVerticalPanel(label);
-	sim.removeWidgetFromVerticalPanel(slider);
         super.delete();
     }
     
@@ -320,7 +313,6 @@ class PotElm extends CircuitElm implements Command, MouseWheelHandler {
 	if (n == 1) {
 	    sliderText = ei.textf.getText();
 	    label.setText(sliderText);
-	    sim.setiFrameHeight();
 	}
 	if (n == 2)
 	    flags = ei.changeFlag(flags, FLAG_SHOW_VALUES);

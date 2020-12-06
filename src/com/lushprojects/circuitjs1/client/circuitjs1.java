@@ -71,116 +71,108 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.Window.ClosingEvent;
 
 public class circuitjs1 implements EntryPoint {
-	
-	public static final String versionString="2.2.17js";
-	
-	// Set to true if the server runs the shortrelay.php file in the same directory as the circuit simulator
-	public static final boolean shortRelaySupported = true;
 
-	static CirSim mysim;
-	HashMap<String,String> localizationMap;
-	
-  public void onModuleLoad() {
-      localizationMap = new HashMap<String,String>();
-      
-      loadLocale();
-  }
+    public static final String versionString="2.2.17js";
 
-  native String language()  /*-{ // Modified to support Electron which return empty array for navigator.languages
-      if (navigator.languages) {
-        if (navigator.languages.length>0)
-          return navigator.languages[0];
-        else
-          return "en-US";
-      } else {
-      	return  (navigator.language || navigator.userLanguage) ;  
-      }
-  }-*/;
+    // Set to true if the server runs the shortrelay.php file in the same directory as the circuit simulator
+    public static final boolean shortRelaySupported = true;
 
-  void loadLocale() {
-  	String url;
-	QueryParameters qp = new QueryParameters();
-	String lang = qp.getValue("lang");
-	if (lang == null) {
-	    Storage stor = Storage.getLocalStorageIfSupported();
-	    if (stor != null)
-		lang = stor.getItem("language");
-	    if (lang == null)
-		lang = language();
-	}
-  	GWT.log("got language " + lang);
+    static CirSim mysim;
+    HashMap<String,String> localizationMap;
+
+    public void onModuleLoad() {
+        localizationMap = new HashMap<String,String>();
+
+        loadLocale();
+    }
+
+    native String language()  /*-{ // Modified to support Electron which return empty array for navigator.languages
+        if (navigator.languages) {
+            if (navigator.languages.length>0)
+                return navigator.languages[0];
+            else
+                return "en-US";
+        } else {
+            return  (navigator.language || navigator.userLanguage) ;
+        }
+    }-*/;
+
+    void loadLocale() {
+        String url;
+        QueryParameters qp = new QueryParameters();
+        String lang = qp.getValue("lang");
+        if (lang == null) {
+            Storage stor = Storage.getLocalStorageIfSupported();
+            if (stor != null)
+                lang = stor.getItem("language");
+            if (lang == null)
+                lang = language();
+        }
+        GWT.log("got language " + lang);
 //  	lang = "pl";
-  	lang = lang.replaceFirst("-.*", "");
-  	if (lang.startsWith("en")) {
-  	    // no need to load locale file for English
-  	    loadSimulator();
-  	    return;
-  	}
-  	url = GWT.getModuleBaseURL()+"locale_" + lang + ".txt";
-		RequestBuilder requestBuilder = new RequestBuilder(RequestBuilder.GET, url);
-		try {
-			requestBuilder.sendRequest(null, new RequestCallback() {
-				public void onError(Request request, Throwable exception) {
-					GWT.log("File Error Response", exception);
-				}
+        lang = lang.replaceFirst("-.*", "");
+        if (lang.startsWith("en")) {
+            // no need to load locale file for English
+            loadSimulator();
+            return;
+        }
+        url = GWT.getModuleBaseURL()+"locale_" + lang + ".txt";
+        RequestBuilder requestBuilder = new RequestBuilder(RequestBuilder.GET, url);
+        try {
+            requestBuilder.sendRequest(null, new RequestCallback() {
+                public void onError(Request request, Throwable exception) {
+                    GWT.log("File Error Response", exception);
+                }
 
-				public void onResponseReceived(Request request, Response response) {
-					// processing goes here
-					if (response.getStatusCode()==Response.SC_OK) {
-					String text = response.getText();
-					processLocale(text);
-					// end or processing
-					}
-					else {
-						GWT.log("Bad file server response:"+response.getStatusText() );
-						loadSimulator();
-					}
-				}
-			});
-		} catch (RequestException e) {
-			GWT.log("failed file reading", e);
-		}
+                public void onResponseReceived(Request request, Response response) {
+                    // processing goes here
+                    if (response.getStatusCode()==Response.SC_OK) {
+                        String text = response.getText();
+                        processLocale(text);
+                        // end or processing
+                    }
+                    else {
+                        GWT.log("Bad file server response:"+response.getStatusText() );
+                        loadSimulator();
+                    }
+                }
+            });
+        } catch (RequestException e) {
+            GWT.log("failed file reading", e);
+        }
 
-  }
-  
-  void processLocale(String data) {
-      String lines[] = data.split("\r?\n");
-      int i;
-      for (i = 0; i != lines.length; i++) {
-	  String line = lines[i];
-	  if (line.length() == 0)
-	      continue;
-	  if (line.charAt(0) != '"') {
-	      CirSim.console("ignoring line in string catalog: " + line);
-	      continue;
-	  }
-	  int q2 = line.indexOf('"', 1);
-	  if (q2 < 0 || line.charAt(q2+1) != '=' || line.charAt(q2+2) != '"' ||
-		  line.charAt(line.length()-1) != '"') {
-	      CirSim.console("ignoring line in string catalog: " + line);
-	      continue;
-	  }
-	  String str1 = line.substring(1, q2);
-	  String str2 = line.substring(q2+3, line.length()-1);
-	  localizationMap.put(str1, str2);
-      }
-      loadSimulator();
-  }
-  
-  public void loadSimulator() {
-	  mysim = new CirSim();
-	  mysim.localizationMap = localizationMap;
-	  mysim.init();
+    }
 
-	    Window.addResizeHandler(new ResizeHandler() {
-	    	 
-            public void onResize(ResizeEvent event)
-            {               
-            	mysim.setCanvasSize();
-                mysim.setiFrameHeight();	
-                	
+    void processLocale(String data) {
+        String lines[] = data.split("\r?\n");
+        int i;
+        for (i = 0; i != lines.length; i++) {
+            String line = lines[i];
+            if (line.length() == 0)
+                continue;
+            if (line.charAt(0) != '"') {
+                CirSim.console("ignoring line in string catalog: " + line);
+                continue;
             }
-        });
+            int q2 = line.indexOf('"', 1);
+            if (q2 < 0 || line.charAt(q2+1) != '=' || line.charAt(q2+2) != '"' ||
+                    line.charAt(line.length()-1) != '"') {
+                CirSim.console("ignoring line in string catalog: " + line);
+                continue;
+            }
+            String str1 = line.substring(1, q2);
+            String str2 = line.substring(q2+3, line.length()-1);
+            localizationMap.put(str1, str2);
+        }
+        loadSimulator();
+    }
+
+    public void loadSimulator() {
+        mysim = new CirSim();
+        mysim.localizationMap = localizationMap;
+        mysim.init();
+
+        Window.addResizeHandler(event -> mysim.setCanvasSize());
 	    
 	    /*
 	    Window.addWindowClosingHandler(new Window.ClosingHandler() {
@@ -191,11 +183,8 @@ public class circuitjs1 implements EntryPoint {
 	    });
 	     */
 
-	  mysim.updateCircuit();
-	  
+        mysim.updateCircuit();
+    }
 
-	  
-  	}
-  
-  }
+}
 	  
