@@ -86,4 +86,10 @@ class GroundElm extends CircuitElm {
     double getCurrentIntoNode(int n) {
         return -current;
     }
+
+    @Override
+    void shortFlipElement(CirSim cs, int mal) {}
+
+    @Override
+    void openFlipElement(CirSim cs, int mal) {}
 }

@@ -405,4 +405,10 @@ class VoltageElm extends CircuitElm {
         if (n == 5)
             dutyCycle = ei.value * .01;
     }
+
+    @Override
+    void shortFlipElement(CirSim cs, int mal) {}
+
+    @Override
+    void openFlipElement(CirSim cs, int mal) {}
 }

@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact build-on-make="true" name="circuitjs1:GWT">
-    <output-path>$PROJECT_DIR$/classes/artifacts/circuitjs1_GWT</output-path>
+    <output-path>$PROJECT_DIR$/war</output-path>
     <root id="root">
       <element id="gwt-compiler-output" facet="circuitjs1/gwt/GWT" />
     </root>

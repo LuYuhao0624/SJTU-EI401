@@ -395,4 +395,161 @@ class TransistorElm extends CircuitElm {
             return -ic;
         return -ie;
     }
+
+    @Override
+    void shortFlipElement(CirSim cs, int mal) {
+        if (!shorted) {
+            int x1, y1, x2, y2;
+            if (mal == 0) {
+                x1 = point1.x;
+                y1 = point1.y;
+                x2 = coll[0].x;
+                y2 = coll[0].y;
+            }
+            else if (mal == 1) {
+                x1 = coll[0].x;
+                y1 = coll[0].y;
+                x2 = emit[0].x;
+                y2 = emit[0].y;
+            }
+            else {
+                x1 = emit[0].x;
+                y1 = emit[0].y;
+                x2 = point1.x;
+                y2 = point1.y;
+            }
+            shortWire = new ShortWireElm(x1, y1, x2, y2, flags, null);
+            shortWire.settled = settled;
+            shortWire.main = this;
+            shortWire.setPoints();
+            cs.elmList.add(shortWire);
+            shorted = true;
+            seed = mal;
+        }
+        else {
+            cs.elmList.removeElement(shortWire);
+            shorted = false;
+            seed = -1;
+        }
+    }
+
+    OpenWireElm openWire;
+    @Override
+    void openFlipElement(CirSim cs, int mal) {
+        int hs = 16;
+        if (!opened) {
+            setVisualPosition();
+            seed = mal;
+            int swx1, swy1, swx2, swy2, wx1, wy1, wx2, wy2;
+            if (mal == 3) {
+                swx1 = x;
+                swy1 = y;
+                shorten();
+                swx2 = x;
+                swy2 = y;
+            }
+            else {
+                int sign;
+                swx1 = wx1 = x2;
+                swy1 = wy1 = y2;
+                shorten();
+                swx2 = wx2 = x2;
+                swy2 = wy2 = y2;
+                if (dx != 0) {
+                    sign = (mal == 4 ? -1 : 1);
+                    swy1 += sign * hs;
+                    swy2 += sign * hs;
+                    wy1 -= sign * hs;
+                    wy2 -= sign * hs;
+                }
+                else {
+                    sign = (mal == 4 ? 1 : -1);
+                    swx1 += sign * hs;
+                    swx2 += sign * hs;
+                    wx1 -= sign * hs;
+                    wx2 -= sign * hs;
+                }
+                openWire = new OpenWireElm(wx1, wy1, wx2, wy2, flags, null);
+                openWire.settled = settled;
+                openWire.main = this;
+                openWire.setPoints();
+                cs.elmList.addElement(openWire);
+            }
+            openSwitch = new OpenSwitchElm(swx1, swy1, swx2, swy2, flags);
+            openSwitch.settled = settled;
+            openSwitch.main = this;
+            openSwitch.setPoints();
+            cs.elmList.addElement(openSwitch);
+            opened = true;
+        }
+        else {
+            lengthen();
+            cs.elmList.removeElement(openSwitch);
+            if (seed != 3) {
+                cs.elmList.removeElement(openWire);
+            }
+            opened = false;
+            seed = -1;
+        }
+    }
+
+    @Override
+    void shorten() {
+        int n = (seed == 3 ? 0 : 1);
+        int sign = (seed == 3 ? 1 : -1);
+        if (dx != 0) {
+            this.movePoint(n, sign * times * dsign, 0);
+        }
+        else {
+            this.movePoint(n, 0, sign * times * dsign);
+        }
+    }
+
+    @Override
+    void lengthen() {
+        int n = (seed == 3 ? 0 : 1);
+        int sign = (seed == 3 ? -1 : 1);
+        if (dx != 0) {
+            this.movePoint(n, sign * times * dsign, 0);
+        }
+        else {
+            this.movePoint(n, 0, sign * times * dsign);
+        }
+    }
+
+    @Override
+    void movePoint(int n, int dx, int dy) {
+        if (n == 0) {
+            x += dx;
+            y += dy;
+        }
+        else {
+            x2 += dx;
+            y2 += dy;
+        }
+        setPoints();
+    }
+
+    void drawOpened(Graphics g) {
+        // now the position is moved, move back and draw
+        if (!supervisor) {
+            lengthen();
+        }
+        draw(g);
+        if (!supervisor) {
+            shorten();
+        }
+    }
+
+    @Override
+    void malfunction(CirSim cs, int seed) {
+        this.seed = seed;
+        if (seed == 0 || seed == 1 || seed == 2) {
+            shortFlipElement(cs, seed);
+        }
+        else if (seed == 3 || seed == 4 || seed == 5) {
+            openFlipElement(cs, seed);
+        }
+    }
+
 }

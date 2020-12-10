@@ -39,6 +39,11 @@ class SwitchElm extends CircuitElm {
         posCount = 2;
     }
 
+    public SwitchElm(int xa, int ya, int xb, int yb, int f) {
+        super(xa, ya, xb, yb, f);
+    }
+
+
     public SwitchElm(int xa, int ya, int xb, int yb, int f,
                      StringTokenizer st) {
         super(xa, ya, xb, yb, f);
@@ -158,4 +163,10 @@ class SwitchElm extends CircuitElm {
     int getShortcut() {
         return 's';
     }
+
+    @Override
+    void shortFlipElement(CirSim cs, int mal) {}
+
+    @Override
+    void openFlipElement(CirSim cs, int mal) {}
 }

@@ -273,7 +273,7 @@ public class CirSim implements MouseDownHandler, MouseMoveHandler, MouseUpHandle
         theSim = this;
     }
 
-    String startCircuit = null;
+    String startCircuit = "experiment.txt";
     String startLabel = null;
     String startCircuitText = null;
     String startCircuitLink = null;
@@ -617,6 +617,46 @@ public class CirSim implements MouseDownHandler, MouseMoveHandler, MouseUpHandle
         elmMenuBar.addItem(elmFlipMenuItem = new MenuItem(LS("Swap Terminals"), new MyCommand("elm", "flip")));
         elmMenuBar.addItem(elmSplitMenuItem = menuItemWithShortcut("", LS("Split Wire"), LS(ctrlMetaKey + "-click"), new MyCommand("elm", "split")));
         elmMenuBar.addItem(elmSliderMenuItem = new MenuItem(LS("Sliders..."), new MyCommand("elm", "sliders")));
+
+        elmMenuBar.addItem((elmFlipMenuItem = new MenuItem(
+                LS("Short/Un-short"), new MyCommand("elm", "shortflip")
+        )));
+        elmMenuBar.addItem((elmFlipMenuItem = new MenuItem(
+                LS("Open/Close"), new MyCommand("elm", "openflip")
+        )));
+        elmMenuBar.addItem((elmFlipMenuItem = new MenuItem(
+                LS("Supervisor"), new MyCommand("elm", "supervisor")
+        )));
+        elmMenuBar.addItem((elmFlipMenuItem = new MenuItem(
+                LS("Redundant"), new MyCommand("elm", "redundant")
+        )));
+
+        MenuBar transistorBar = new MenuBar(true);
+        transistorBar.addItem(new MenuItem(
+                LS("Short BC"), new MyCommand("elm", "shortbc")
+        ));
+        transistorBar.addItem(new MenuItem(
+                LS("Short CE"), new MyCommand("elm", "shortce")
+        ));
+        transistorBar.addItem(new MenuItem(
+                LS("Short EB"), new MyCommand("elm", "shorteb")
+        ));
+        transistorBar.addItem(new MenuItem(
+                LS("Open B"), new MyCommand("elm", "openb")
+        ));
+        transistorBar.addItem(new MenuItem(
+                LS("Open C"), new MyCommand("elm", "openc")
+        ));
+        transistorBar.addItem(new MenuItem(
+                LS("Open E"), new MyCommand("elm", "opene")
+        ));
+
+        elmMenuBar.addItem(
+                SafeHtmlUtils.fromTrustedString(
+                        CheckboxMenuItem.checkBoxHtml +
+                                LS("Transistor")
+                ), transistorBar
+        );
 
         scopePopupMenu = new ScopePopupMenu();
 
@@ -1209,7 +1249,13 @@ public class CirSim implements MouseDownHandler, MouseMoveHandler, MouseUpHandle
                 g.setColor(Color.gray);
 	    /*else if (conductanceCheckItem.getState())
 	      g.setColor(Color.white);*/
-            getElm(i).draw(g);
+            CircuitElm ce = getElm(i);
+            if (!ce.opened) {
+                ce.draw(g);
+            }
+            else {
+                ce.drawOpened(g);
+            }
         }
         mydrawtime += System.currentTimeMillis() - mydrawstarttime;
 
@@ -1230,8 +1276,25 @@ public class CirSim implements MouseDownHandler, MouseMoveHandler, MouseUpHandle
 //			ce.drawPost(g, ce.x2, ce.y2);
                 if (ce != mouseElm || tempMouseMode != MODE_DRAG_POST) {
                     g.setColor(Color.gray);
-                    g.fillOval(ce.x - 3, ce.y - 3, 7, 7);
-                    g.fillOval(ce.x2 - 3, ce.y2 - 3, 7, 7);
+                    if (!(ce instanceof OpenSwitchElm ||
+                            ce instanceof OpenWireElm ||
+                            ce instanceof ShortWireElm)) {
+                        int x1, y1, x2, y2;
+                        if (!ce.opened) {
+                            x1 = ce.x;
+                            y1 = ce.y;
+                            x2 = ce.x2;
+                            y2 = ce.y2;
+                        }
+                        else {
+                            x1 = ce.visualPosition[0];
+                            y1 = ce.visualPosition[1];
+                            x2 = ce.visualPosition[2];
+                            y2 = ce.visualPosition[3];
+                        }
+                        g.fillOval(x1 - 3, y1 - 3, 7, 7);
+                        g.fillOval(x2 - 3, y2 - 3, 7, 7);
+                    }
                 } else {
                     ce.drawHandles(g, Color.cyan);
                 }
@@ -1757,7 +1820,8 @@ public class CirSim implements MouseDownHandler, MouseMoveHandler, MouseUpHandle
             for (j = 0; j != posts; j++) {
                 Point pt = ce.getPost(j);
                 Integer g = postCountMap.get(pt);
-                postCountMap.put(pt, g == null ? 1 : g + 1);
+                postCountMap.put(pt, g == null ? 1 :
+                        g+(ce instanceof ShortWireElm ? 0 : 1));
                 NodeMapEntry cln = nodeMap.get(pt);
 
                 // is this node not in map yet?  or is the node number unallocated?
@@ -2743,6 +2807,25 @@ public class CirSim implements MouseDownHandler, MouseMoveHandler, MouseUpHandle
         //	    return;
         //	}
 
+        if (item.equals("shortflip"))
+            doShortFlip();
+        if (item.equals("openflip"))
+            doOpenFlip();
+        if (item.equals("supervisor"))
+            doSupervisorFlip();
+        if (item.equals("shortbc"))
+            doTransistorShortFlip(0);
+        if (item.equals("shortce"))
+            doTransistorShortFlip(1);
+        if (item.equals("shorteb"))
+            doTransistorShortFlip(2);
+        if (item.equals("openb"))
+            doTransistorOpenFlip(3);
+        if (item.equals("openc"))
+            doTransistorOpenFlip(4);
+        if (item.equals("opene"))
+            doTransistorOpenFlip(5);
+
         if (item == "centrecircuit") {
             pushUndo();
             centreCircuit();
@@ -3047,7 +3130,7 @@ public class CirSim implements MouseDownHandler, MouseMoveHandler, MouseUpHandle
             String m = ce.dumpModel();
             if (m != null && !m.isEmpty())
                 dump += m + "\n";
-            dump += ce.dump() + "\n";
+            dump += (ce.needDump() ? ce.dump() + "\n" : "");
         }
         for (i = 0; i != scopeCount; i++) {
             String d = scopes[i].dump();
@@ -3294,6 +3377,11 @@ public class CirSim implements MouseDownHandler, MouseMoveHandler, MouseUpHandle
                     int x2 = new Integer(st.nextToken()).intValue();
                     int y2 = new Integer(st.nextToken()).intValue();
                     int f = new Integer(st.nextToken()).intValue();
+                    int seed = new Integer(st.nextToken());
+
+                    if (tint == 500 || tint == 501 || tint == 502) {
+                        continue;
+                    }
 
                     CircuitElm newce = createCe(tint, x1, y1, x2, y2, f, st);
                     if (newce == null) {
@@ -3301,6 +3389,11 @@ public class CirSim implements MouseDownHandler, MouseMoveHandler, MouseUpHandle
                         break;
                     }
                     newce.setPoints();
+                    newce.seed = seed;
+                    if (!(newce instanceof TestPointElm ||
+                            newce instanceof ProbeElm)) {
+                        newce.settled = true;
+                    }
                     elmList.addElement(newce);
                 } catch (Exception ee) {
                     ee.printStackTrace();
@@ -3328,6 +3421,10 @@ public class CirSim implements MouseDownHandler, MouseMoveHandler, MouseUpHandle
             updateModels();
 
         AudioInputElm.clearCache();  // to save memory
+        for (int j = 0; j < elmList.size(); j++) {
+            CircuitElm ce = getElm(j);
+            ce.malfunction(this, ce.seed);
+        }
     }
 
     // delete sliders for an element
@@ -3585,6 +3682,13 @@ public class CirSim implements MouseDownHandler, MouseMoveHandler, MouseUpHandle
     }
 
     void dragPost(int x, int y) {
+//        if (!supervisor && !(mouseElm instanceof TestPointElm ||
+//                mouseElm instanceof ProbeElm)) {
+//            return;
+//        }
+        if (mouseElm.settled) {
+            return;
+        }
         if (draggingPost == -1) {
             draggingPost =
                     (Graphics.distanceSq(mouseElm.x, mouseElm.y, x, y) >
@@ -3653,6 +3757,11 @@ public class CirSim implements MouseDownHandler, MouseMoveHandler, MouseUpHandle
             if (ce != null)
                 ce.setMouseElm(true);
             mouseElm = ce;
+        }
+        if (mouseElm instanceof ShortWireElm ||
+                mouseElm instanceof OpenWireElm ||
+                mouseElm instanceof OpenSwitchElm) {
+            mouseElm = ce.main;
         }
     }
 
@@ -4948,6 +5057,12 @@ public class CirSim implements MouseDownHandler, MouseMoveHandler, MouseUpHandle
                 return new CrystalElm(x1, y1, x2, y2, f, st);
             case 413:
                 return new SRAMElm(x1, y1, x2, y2, f, st);
+            case 500:
+                return new OpenSwitchElm(x1, y1, x2, y2, f);
+            case 501:
+                return new OpenWireElm(x1, y1, x2, y2, f, null);
+            case 502:
+                return new ShortWireElm(x1, y1, x2, y2, f, null);
         }
         return null;
     }
@@ -5509,4 +5624,42 @@ public class CirSim implements MouseDownHandler, MouseMoveHandler, MouseUpHandle
             for (j = 0; j != n; j++)
                 a[i][j] = inva[i][j];
     }
+
+    void doShortFlip() {
+        if (!(menuElm instanceof TransistorElm)) {
+            menuElm.shortFlipElement(this, 0);
+            needAnalyze();
+        }
+    }
+
+    void doOpenFlip() {
+        if (!(menuElm instanceof TransistorElm)) {
+            menuElm.openFlipElement(this, 1);
+            needAnalyze();
+        }
+    }
+
+    void doTransistorShortFlip(int mal) {
+        if (menuElm instanceof TransistorElm) {
+            menuElm.shortFlipElement(this, mal);
+            needAnalyze();
+        }
+    }
+
+    void doTransistorOpenFlip(int mal) {
+        if (menuElm instanceof TransistorElm) {
+            menuElm.openFlipElement(this, mal);
+            needAnalyze();
+        }
+    }
+
+    boolean supervisor = true;
+    void doSupervisorFlip() {
+        supervisor = !supervisor;
+        for (int i = 0; i != elmList.size(); i++) {
+            CircuitElm ce = getElm(i);
+            ce.supervisor = supervisor;
+        }
+    }
+
 }

@@ -43,6 +43,10 @@ class ScopeElm extends CircuitElm {
         noDiagonal = false;
         String sStr = st.nextToken();
         StringTokenizer sst = new StringTokenizer(sStr, "_");
+//        StringTokenizer test = new StringTokenizer(sStr, "_");
+//        while (test.hasMoreTokens()) {
+//            CirSim.console(test.nextToken());
+//        }
         elmScope = new Scope(sim);
         elmScope.undump(sst);
         setPoints();
@@ -112,6 +116,5 @@ class ScopeElm extends CircuitElm {
     int getPostCount() {
         return 0;
     }
-
 
 }

@@ -174,8 +174,21 @@ public abstract class CircuitElm implements Editable {
     // dump component state for export/undo
     String dump() {
         int t = getDumpType();
-        return (t < 127 ? ((char) t) + " " : t + " ") + x + " " + y + " " +
-                x2 + " " + y2 + " " + flags;
+        int dump[] = new int[4];
+        if (opened) {
+            for (int i = 0; i < 4; i++) {
+                dump[i] = visualPosition[i];
+            }
+        }
+        else {
+            dump[0] = x;
+            dump[1] = y;
+            dump[2] = x2;
+            dump[3] = y2;
+        }
+        return (t < 127 ? ((char) t) + " " : t + " ") + dump[0] + " " +
+                dump[1] + " " + dump[2] + " " + dump[3] + " " +
+                flags + " " + seed;
     }
 
     // handle reset button
@@ -495,19 +508,7 @@ public abstract class CircuitElm implements Editable {
         }
     }
 
-    void drawHandles(Graphics g, Color c) {
-        g.setColor(c);
-        if (lastHandleGrabbed == -1)
-            g.fillRect(x - 3, y - 3, 7, 7);
-        else if (lastHandleGrabbed == 0)
-            g.fillRect(x - 4, y - 4, 9, 9);
-        if (numHandles == 2) {
-            if (lastHandleGrabbed == -1)
-                g.fillRect(x2 - 3, y2 - 3, 7, 7);
-            else if (lastHandleGrabbed == 1)
-                g.fillRect(x2 - 4, y2 - 4, 9, 9);
-        }
-    }
+    void drawHandles(Graphics g, Color c) {}
 
     int getHandleGrabbedClose(int xtest, int ytest, int deltaSq, int minSize) {
         lastHandleGrabbed = -1;
@@ -1040,7 +1041,12 @@ public abstract class CircuitElm implements Editable {
     }
 
     boolean isSelected() {
-        return selected;
+        if (!settled || supervisor) {
+            return selected;
+        }
+        else {
+            return false;
+        }
     }
 
     boolean canShowValueInScope(int v) {
@@ -1048,11 +1054,15 @@ public abstract class CircuitElm implements Editable {
     }
 
     void setSelected(boolean x) {
-        selected = x;
+        if (!settled || supervisor) {
+            selected = x;
+        }
     }
 
     void selectRect(Rectangle r) {
-        selected = r.intersects(boundingBox);
+        if (!settled || supervisor) {
+            selected = r.intersects(boundingBox);
+        }
     }
 
     static int abs(int x) {
@@ -1134,4 +1144,119 @@ public abstract class CircuitElm implements Editable {
         y2 = oldy;
         setPoints();
     }
+
+    boolean supervisor = true;
+    boolean settled = false;
+    boolean shorted = false;
+    boolean opened = false;
+    ShortWireElm shortWire;
+    OpenSwitchElm openSwitch;
+    void shortFlipElement(CirSim cs, int mal) {
+        if (!shorted) {
+            shortWire = new ShortWireElm(x, y, x2, y2, flags, null);
+            shortWire.setPoints();
+            shortWire.settled = settled;
+            shortWire.main = this;
+            cs.elmList.addElement(shortWire);
+            shorted = true;
+            seed = 0;
+        }
+        else {
+            cs.elmList.removeElement(shortWire);
+            shorted = false;
+            seed = -1;
+        }
+    }
+
+    int times = (supervisor ? 10 : 1);
+    int visualPosition[] = new int[4];
+    // open circuit
+    void openFlipElement(CirSim cs, int mal) {
+        CirSim.console("total: " + cs.elmList.size() + " location: " +
+                cs.locateElm(openSwitch));
+        if (!opened) {
+            setVisualPosition();
+            int swx2 = x2;
+            int swy2 = y2;
+            shorten();
+            openSwitch = new OpenSwitchElm(x2, y2, swx2, swy2, flags);
+            openSwitch.settled = settled;
+            openSwitch.main = this;
+            openSwitch.setPoints();
+            cs.elmList.addElement(openSwitch);
+            opened = true;
+            seed = 1;
+        }
+        else {
+            lengthen();
+            cs.elmList.removeElement(openSwitch);
+            opened = false;
+            seed = -1;
+        }
+        CirSim.console("total: " + cs.elmList.size() + " location: " +
+                cs.locateElm(openSwitch));
+        CirSim.console(cs.dumpCircuit());
+    }
+
+    void shorten() {
+        if (dx != 0) {
+            this.movePoint(1, -times * dsign, 0);
+        }
+        else {
+            this.movePoint(1, 0, -times * dsign);
+        }
+    }
+    void lengthen() {
+        if (dx != 0) {
+            this.movePoint(1, times * dsign, 0);
+        }
+        else {
+            this.movePoint(1, 0, times * dsign);
+        }
+    }
+
+    int seed = -1;
+    void malfunction(CirSim cs, int seed) {
+        if (seed == 0) {
+            shortFlipElement(cs, seed);
+        }
+        else if (seed == 1) {
+            openFlipElement(cs, seed);
+        }
+    }
+
+    void drawOpened(Graphics g) {
+        // now the position is moved, move back and draw
+        int movingDelta = times * dsign;
+        if (!supervisor) {
+            if (dx != 0) {
+                x2 += movingDelta;
+            } else {
+                y2 += movingDelta;
+            }
+            setPoints();
+        }
+        draw(g);
+        if (!supervisor) {
+            if (dx != 0) {
+                x2 -= movingDelta;
+            } else {
+                y2 -= movingDelta;
+            }
+            setPoints();
+        }
+    }
+
+    boolean needDump() {
+        return true;
+    }
+
+    void setVisualPosition() {
+        visualPosition[0] = x;
+        visualPosition[1] = y;
+        visualPosition[2] = x2;
+        visualPosition[3] = y2;
+    }
+
+    CircuitElm main;
 }

@@ -117,4 +117,15 @@ class WireElm extends CircuitElm {
     int getShortcut() {
         return 'w';
     }
+
+    @Override
+    void shortFlipElement(CirSim cs, int mal) {}
+
+    @Override
+    void malfunction(CirSim cs, int seed) {
+        if (seed == 1) {
+            openFlipElement(cs, seed);
+        }
+    }
+
 }
