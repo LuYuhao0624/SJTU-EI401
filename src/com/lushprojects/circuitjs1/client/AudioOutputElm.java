@@ -18,66 +18,58 @@ public class AudioOutputElm extends CircuitElm {
     double dataStart;
     static int lastSamplingRate = 8000;
     static boolean okToChangeTimeStep;
-
-    public AudioOutputElm(int xx, int yy) {
-        super(xx, yy);
-        duration = 1;
-        samplingRate = lastSamplingRate;
-        labelNum = getNextLabelNum();
-        setDataCount();
-        createButton();
-    }
-
-    public AudioOutputElm(int xa, int ya, int xb, int yb, int f,
-                          StringTokenizer st) {
-        super(xa, ya, xb, yb, f);
-        duration = Double.parseDouble(st.nextToken());
-        samplingRate = Integer.parseInt(st.nextToken());
-        labelNum = Integer.parseInt(st.nextToken());
-        setDataCount();
-        createButton();
-    }
-
-    String dump() {
-        return super.dump() + " " + duration + " " + samplingRate + " " + labelNum;
-    }
-
-    void draggingDone() {
-        setTimeStep();
-    }
-
-    // get next unused labelNum value
-    int getNextLabelNum() {
-        int i;
-        int num = 1;
-        if (sim.elmList == null)
-            return 0;
-        for (i = 0; i != sim.elmList.size(); i++) {
-            CircuitElm ce = sim.getElm(i);
-            if (!(ce instanceof AudioOutputElm))
-                continue;
-            int ln = ((AudioOutputElm) ce).labelNum;
-            if (ln >= num)
-                num = ln + 1;
-        }
-        return num;
-    }
-
-    int getDumpType() {
-        return 211;
-    }
-
-    int getPostCount() {
-        return 1;
-    }
-
-    void reset() {
-        dataPtr = 0;
-        dataFull = false;
-        dataSampleCount = 0;
-        nextDataSample = 0;
-        dataSample = 0;
-    }
+    
+	public AudioOutputElm(int xx, int yy) {
+	    super(xx, yy);
+	    duration = 1;
+	    samplingRate = lastSamplingRate;
+	    labelNum = getNextLabelNum();
+	    setDataCount();
+	    createButton();
+	}
+	public AudioOutputElm(int xa, int ya, int xb, int yb, int f,
+			 StringTokenizer st) {
+	    super(xa, ya, xb, yb, f);
+	    duration = Double.parseDouble(st.nextToken());
+	    samplingRate = Integer.parseInt(st.nextToken());
+	    labelNum = Integer.parseInt(st.nextToken());
+	    setDataCount();
+	    createButton();
+	}
+	String dump() { 
+	    return super.dump() + " " + duration + " " + samplingRate + " " + labelNum;
+	}
+	
+	void draggingDone() {
+	    setTimeStep();
+	}
+	
+	// get next unused labelNum value
+	int getNextLabelNum() {
+	    int i;
+	    int num = 1;
+	    if (sim.elmList == null)
+		return 0;
+	    for (i = 0; i != sim.elmList.size(); i++) {
+		CircuitElm ce = sim.getElm(i);
+		if (!(ce instanceof AudioOutputElm))
+		    continue;
+		int ln = ((AudioOutputElm)ce).labelNum;
+		if (ln >= num)
+		    num = ln+1;
+	    }
+	    return num;
+	}
+	
+	int getDumpType() { return 211; }
+	int getPostCount() { return 1; }
+	void reset() {
+	    dataPtr = 0;
+	    dataFull = false;
+	    dataSampleCount = 0;
+	    nextDataSample = 0;
+	    dataSample = 0;
+	}
 
     void setPoints() {
         super.setPoints();
@@ -211,22 +203,9 @@ public class AudioOutputElm extends CircuitElm {
         }
     }
 
-    void createButton() {
-        String label = "&#9654; " + sim.LS("Play Audio");
-        if (labelNum > 1)
-            label += " " + labelNum;
-        sim.addWidgetToVerticalPanel(button = new Button(label));
-        button.setStylePrimaryName("topButton");
-        button.addClickHandler(new ClickHandler() {
-            public void onClick(ClickEvent event) {
-                play();
-            }
-        });
-
-    }
-
+        void createButton() { }
+        void delete() {
     void delete() {
-        sim.removeWidgetFromVerticalPanel(button);
         super.delete();
     }
 

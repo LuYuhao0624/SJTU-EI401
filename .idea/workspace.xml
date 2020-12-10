@@ -1,0 +1,278 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:npm_and_yarn" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:npm_and_yarn" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:app" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:pr" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:origin/master" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </select>
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="5bfd321d-7bad-499f-a573-47205b0f6d75" name="Default Changelist" comment="remove functionalities">
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectId" id="1jaXJTC9pN0tctcHcvGIAQQX1Et" />
+  <component name="ProjectViewState">
+    <option name="flattenPackages" value="true" />
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="nodejs_package_manager_path" value="npm" />
+    <property name="project.structure.last.edited" value="Artifacts" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.34252873" />
+    <property name="settings.editor.selected.configurable" value="configurable.group.editor" />
+  </component>
+  <component name="RunManager">
+    <configuration name="Web App" type="GWT.ConfigurationType" factoryName="GWT Configuration">
+      <option name="RUN_PAGE" value="circuitjs.html" />
+      <option name="BROWSER" value="e5120d43-2c3f-47ef-9f26-65e539e05186" />
+      <option name="USE_SUPER_DEV_MODE" value="true" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <module name="circuitjs1" />
+      <method v="2">
+        <option name="MakeProject" enabled="true" />
+      </method>
+    </configuration>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5bfd321d-7bad-499f-a573-47205b0f6d75" name="Default Changelist" comment="" />
+      <created>1604043104192</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1604043104192</updated>
+      <workItem from="1604043356263" duration="782000" />
+      <workItem from="1604044455059" duration="291000" />
+      <workItem from="1606537069633" duration="17529000" />
+      <workItem from="1606619323493" duration="1083000" />
+      <workItem from="1606906804264" duration="360000" />
+      <workItem from="1607175796600" duration="542000" />
+      <workItem from="1607236119927" duration="269000" />
+      <workItem from="1607236704803" duration="6578000" />
+      <workItem from="1607345526863" duration="10714000" />
+      <workItem from="1607388628483" duration="3410000" />
+      <workItem from="1607403349499" duration="628000" />
+      <workItem from="1607583558725" duration="8000" />
+      <workItem from="1607585611367" duration="567000" />
+    </task>
+    <task id="LOCAL-00001" summary="remove functionalities">
+      <created>1607244096729</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1607244096729</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="oldMeFiltersMigrated" value="true" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="remove functionalities" />
+    <option name="LAST_COMMIT_MESSAGE" value="remove functionalities" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="128" y="0" width="1071" height="673" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1607236348183">
+      <screen x="0" y="0" width="1366" height="696" />
+    </state>
+    <state x="128" y="0" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.696@0.0.1366.696" timestamp="1607236348183" />
+    <state x="128" y="23" width="1071" height="673" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1366.673@0.23.1366.673" timestamp="1604043542116" />
+    <state x="428" y="273" key="#com.intellij.javaee.module.view.common.J2EE.J2EEDeploymentDescriptorLocationPanel.changeDDPath" timestamp="1604043408739">
+      <screen x="0" y="23" width="1366" height="673" />
+    </state>
+    <state x="428" y="273" key="#com.intellij.javaee.module.view.common.J2EE.J2EEDeploymentDescriptorLocationPanel.changeDDPath/0.23.1366.673@0.23.1366.673" timestamp="1604043408739" />
+    <state x="462" y="273" key="#com.intellij.javaee.module.view.web.EditWebRootDialog" timestamp="1604043416820">
+      <screen x="0" y="23" width="1366" height="673" />
+    </state>
+    <state x="462" y="273" key="#com.intellij.javaee.module.view.web.EditWebRootDialog/0.23.1366.673@0.23.1366.673" timestamp="1604043416820" />
+    <state x="421" y="138" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog" timestamp="1606554773466">
+      <screen x="0" y="0" width="1366" height="696" />
+    </state>
+    <state x="421" y="138" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.696@0.0.1366.696" timestamp="1606554773466" />
+    <state x="0" y="-22" width="1366" height="790" maximized="true" key="DiffContextDialog" timestamp="1607351791131">
+      <screen x="0" y="23" width="1366" height="673" />
+    </state>
+    <state x="0" y="-22" width="1366" height="790" maximized="true" key="DiffContextDialog/0.23.1366.673@0.23.1366.673" timestamp="1607351791131" />
+    <state width="1324" height="119" key="GridCell.Tab.0.bottom" timestamp="1607404203774">
+      <screen x="0" y="23" width="1366" height="673" />
+    </state>
+    <state width="1324" height="149" key="GridCell.Tab.0.bottom/0.0.1366.696@0.0.1366.696" timestamp="1607393416612" />
+    <state width="1324" height="119" key="GridCell.Tab.0.bottom/0.23.1366.673@0.23.1366.673" timestamp="1607404203774" />
+    <state width="1324" height="119" key="GridCell.Tab.0.center" timestamp="1607404203773">
+      <screen x="0" y="23" width="1366" height="673" />
+    </state>
+    <state width="1324" height="149" key="GridCell.Tab.0.center/0.0.1366.696@0.0.1366.696" timestamp="1607393416611" />
+    <state width="1324" height="119" key="GridCell.Tab.0.center/0.23.1366.673@0.23.1366.673" timestamp="1607404203773" />
+    <state width="1324" height="119" key="GridCell.Tab.0.left" timestamp="1607404203772">
+      <screen x="0" y="23" width="1366" height="673" />
+    </state>
+    <state width="1324" height="149" key="GridCell.Tab.0.left/0.0.1366.696@0.0.1366.696" timestamp="1607393416609" />
+    <state width="1324" height="119" key="GridCell.Tab.0.left/0.23.1366.673@0.23.1366.673" timestamp="1607404203772" />
+    <state width="1324" height="119" key="GridCell.Tab.0.right" timestamp="1607404203774">
+      <screen x="0" y="23" width="1366" height="673" />
+    </state>
+    <state width="1324" height="149" key="GridCell.Tab.0.right/0.0.1366.696@0.0.1366.696" timestamp="1607393416612" />
+    <state width="1324" height="119" key="GridCell.Tab.0.right/0.23.1366.673@0.23.1366.673" timestamp="1607404203774" />
+    <state width="1324" height="119" key="GridCell.Tab.1.bottom" timestamp="1607404203776">
+      <screen x="0" y="23" width="1366" height="673" />
+    </state>
+    <state width="1324" height="149" key="GridCell.Tab.1.bottom/0.0.1366.696@0.0.1366.696" timestamp="1607393416616" />
+    <state width="1324" height="119" key="GridCell.Tab.1.bottom/0.23.1366.673@0.23.1366.673" timestamp="1607404203776" />
+    <state width="1324" height="119" key="GridCell.Tab.1.center" timestamp="1607404203775">
+      <screen x="0" y="23" width="1366" height="673" />
+    </state>
+    <state width="1324" height="149" key="GridCell.Tab.1.center/0.0.1366.696@0.0.1366.696" timestamp="1607393416614" />
+    <state width="1324" height="119" key="GridCell.Tab.1.center/0.23.1366.673@0.23.1366.673" timestamp="1607404203775" />
+    <state width="1324" height="119" key="GridCell.Tab.1.left" timestamp="1607404203775">
+      <screen x="0" y="23" width="1366" height="673" />
+    </state>
+    <state width="1324" height="149" key="GridCell.Tab.1.left/0.0.1366.696@0.0.1366.696" timestamp="1607393416613" />
+    <state width="1324" height="119" key="GridCell.Tab.1.left/0.23.1366.673@0.23.1366.673" timestamp="1607404203775" />
+    <state width="1324" height="119" key="GridCell.Tab.1.right" timestamp="1607404203775">
+      <screen x="0" y="23" width="1366" height="673" />
+    </state>
+    <state width="1324" height="149" key="GridCell.Tab.1.right/0.0.1366.696@0.0.1366.696" timestamp="1607393416615" />
+    <state width="1324" height="119" key="GridCell.Tab.1.right/0.23.1366.673@0.23.1366.673" timestamp="1607404203775" />
+    <state width="1324" height="119" key="GridCell.Tab.2.bottom" timestamp="1607404203778">
+      <screen x="0" y="23" width="1366" height="673" />
+    </state>
+    <state width="1324" height="149" key="GridCell.Tab.2.bottom/0.0.1366.696@0.0.1366.696" timestamp="1607393416619" />
+    <state width="1324" height="119" key="GridCell.Tab.2.bottom/0.23.1366.673@0.23.1366.673" timestamp="1607404203778" />
+    <state width="1324" height="119" key="GridCell.Tab.2.center" timestamp="1607404203777">
+      <screen x="0" y="23" width="1366" height="673" />
+    </state>
+    <state width="1324" height="149" key="GridCell.Tab.2.center/0.0.1366.696@0.0.1366.696" timestamp="1607393416617" />
+    <state width="1324" height="119" key="GridCell.Tab.2.center/0.23.1366.673@0.23.1366.673" timestamp="1607404203777" />
+    <state width="1324" height="119" key="GridCell.Tab.2.left" timestamp="1607404203776">
+      <screen x="0" y="23" width="1366" height="673" />
+    </state>
+    <state width="1324" height="149" key="GridCell.Tab.2.left/0.0.1366.696@0.0.1366.696" timestamp="1607393416616" />
+    <state width="1324" height="119" key="GridCell.Tab.2.left/0.23.1366.673@0.23.1366.673" timestamp="1607404203776" />
+    <state width="1324" height="119" key="GridCell.Tab.2.right" timestamp="1607404203777">
+      <screen x="0" y="23" width="1366" height="673" />
+    </state>
+    <state width="1324" height="149" key="GridCell.Tab.2.right/0.0.1366.696@0.0.1366.696" timestamp="1607393416618" />
+    <state width="1324" height="119" key="GridCell.Tab.2.right/0.23.1366.673@0.23.1366.673" timestamp="1607404203777" />
+    <state x="240" y="0" key="SettingsEditor" timestamp="1604044567105">
+      <screen x="0" y="0" width="1366" height="696" />
+    </state>
+    <state x="240" y="0" key="SettingsEditor/0.0.1366.696@0.0.1366.696" timestamp="1604044567105" />
+    <state x="158" y="23" key="SettingsEditor/0.23.1366.673@0.23.1366.673" timestamp="1604043510979" />
+    <state x="100" y="80" width="1166" height="588" key="ShowDiffWithBranchDialog" timestamp="1607345940768">
+      <screen x="0" y="23" width="1366" height="673" />
+    </state>
+    <state x="100" y="80" width="1166" height="588" key="ShowDiffWithBranchDialog/0.23.1366.673@0.23.1366.673" timestamp="1607345940768" />
+    <state x="283" y="124" key="Vcs.Push.Dialog.v2" timestamp="1607244104722">
+      <screen x="0" y="0" width="1366" height="696" />
+    </state>
+    <state x="283" y="124" key="Vcs.Push.Dialog.v2/0.0.1366.696@0.0.1366.696" timestamp="1607244104722" />
+    <state x="204" y="181" key="caller.chooser.dialog" timestamp="1606555207820">
+      <screen x="0" y="0" width="1366" height="696" />
+    </state>
+    <state x="204" y="181" key="caller.chooser.dialog/0.0.1366.696@0.0.1366.696" timestamp="1606555207820" />
+    <state x="100" y="23" width="1166" height="673" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1607351791132">
+      <screen x="0" y="23" width="1366" height="673" />
+    </state>
+    <state x="100" y="23" width="1166" height="673" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog/0.23.1366.673@0.23.1366.673" timestamp="1607351791132" />
+    <state x="0" y="0" width="1366" height="768" maximized="true" key="com.intellij.history.integration.ui.views.FileHistoryDialog" timestamp="1607355512158">
+      <screen x="0" y="23" width="1366" height="673" />
+    </state>
+    <state x="0" y="0" width="1366" height="768" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.1366.696@0.0.1366.696" timestamp="1607352120241" />
+    <state x="100" y="80" width="1166" height="588" maximized="true" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.23.1366.673@0.23.1366.673" timestamp="1607355512158" />
+    <state x="384" y="0" width="598" height="696" key="find.popup" timestamp="1607352214731">
+      <screen x="0" y="0" width="1366" height="696" />
+    </state>
+    <state x="384" y="0" width="598" height="696" key="find.popup/0.0.1366.696@0.0.1366.696" timestamp="1607352214731" />
+  </component>
+</project>

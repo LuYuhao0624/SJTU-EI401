@@ -6,7 +6,18 @@ import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.Command;
-import com.google.gwt.user.client.ui.*;
+import com.google.gwt.user.client.ui.Button;
+import com.google.gwt.user.client.ui.DialogBox;
+import com.google.gwt.user.client.ui.FlowPanel;
+import com.google.gwt.user.client.ui.FocusWidget;
+import com.google.gwt.user.client.ui.Grid;
+import com.google.gwt.user.client.ui.HasHorizontalAlignment;
+import com.google.gwt.user.client.ui.HorizontalPanel;
+import com.google.gwt.user.client.ui.Label;
+import com.google.gwt.user.client.ui.Panel;
+import com.google.gwt.user.client.ui.TextArea;
+import com.google.gwt.user.client.ui.TextBox;
+import com.google.gwt.user.client.ui.CheckBox;
 
 class ScopeCheckBox extends CheckBox {
     String menuCmd;
@@ -24,8 +35,6 @@ class ScopeCheckBox extends CheckBox {
 }
 
 public class ScopePropertiesDialog extends DialogBox implements ValueChangeHandler<Boolean> {
-
-
     Panel fp;
     HorizontalPanel hp;
     CirSim sim;
@@ -40,12 +49,12 @@ public class ScopePropertiesDialog extends DialogBox implements ValueChangeHandl
     int nx, ny;
     Label scopeSpeedLabel, manualScaleLabel;
 
-    public ScopePropertiesDialog(CirSim asim, Scope s) {
+    public ScopePropertiesDialog ( CirSim asim, Scope s) {
         super();
-        sim = asim;
+        sim=asim;
         scope = s;
         Button okButton, applyButton;
-        fp = new FlowPanel();
+        fp=new FlowPanel();
         setWidget(fp);
         setText(CirSim.LS("Scope Properties"));
 //		fp.add(l);
@@ -59,7 +68,7 @@ public class ScopePropertiesDialog extends DialogBox implements ValueChangeHandl
         l.getElement().getStyle().setFontWeight(FontWeight.BOLD);
         speedGrid.setWidget(0, 0, l);
         speedBar = new Scrollbar(Scrollbar.HORIZONTAL, 2, 1, 0, 11, cmd);
-        speedGrid.setWidget(1, 0, speedBar);
+        speedGrid.setWidget(1,0, speedBar);
         scopeSpeedLabel = new Label("");
         speedGrid.setWidget(1, 1, scopeSpeedLabel);
 
@@ -76,13 +85,13 @@ public class ScopePropertiesDialog extends DialogBox implements ValueChangeHandl
         boolean transistor = elm != null && elm instanceof TransistorElm;
         grid = new Grid(12, 3);
         if (!transistor) {
-            addLabelToGrid(grid, "Plots");
+            addLabelToGrid(grid,"Plots");
             addItemToGrid(grid, voltageBox = new ScopeCheckBox(CirSim.LS("Show Voltage"), "showvoltage"));
             voltageBox.addValueChangeHandler(this);
             addItemToGrid(grid, currentBox = new ScopeCheckBox(CirSim.LS("Show Current"), "showcurrent"));
             currentBox.addValueChangeHandler(this);
         } else {
-            addLabelToGrid(grid, "Plots");
+            addLabelToGrid(grid,"Plots");
             addItemToGrid(grid, ibBox = new ScopeCheckBox(CirSim.LS("Show Ib"), "showib"));
             ibBox.addValueChangeHandler(this);
             addItemToGrid(grid, icBox = new ScopeCheckBox(CirSim.LS("Show Ic"), "showic"));
@@ -107,7 +116,7 @@ public class ScopePropertiesDialog extends DialogBox implements ValueChangeHandl
         addItemToGrid(grid, manualScaleBox = new ScopeCheckBox(CirSim.LS("Manual Scale"), "manualscale"));
         manualScaleBox.addValueChangeHandler(this);
 
-        addLabelToGrid(grid, "X-Y Plots");
+        addLabelToGrid(grid,"X-Y Plots");
         addItemToGrid(grid, viBox = new ScopeCheckBox(CirSim.LS("Show V vs I"), "showvvsi"));
         viBox.addValueChangeHandler(this);
         addItemToGrid(grid, xyBox = new ScopeCheckBox(CirSim.LS("Plot X/Y"), "plotxy"));
@@ -172,10 +181,11 @@ public class ScopePropertiesDialog extends DialogBox implements ValueChangeHandl
     }
 
 
+
     void addLabelToGrid(Grid g, String s) {
-        if (nx != 0)
+        if (nx !=0)
             ny++;
-        nx = 0;
+        nx=0;
         Label l = new Label(CirSim.LS(s));
         l.getElement().getStyle().setFontWeight(FontWeight.BOLD);
         g.setWidget(ny, nx, l);
@@ -184,7 +194,7 @@ public class ScopePropertiesDialog extends DialogBox implements ValueChangeHandl
     }
 
     void setScopeSpeedLabel() {
-        scopeSpeedLabel.setText(CircuitElm.getUnitText(scope.calcGridStepX(), "s") + "/div");
+        scopeSpeedLabel.setText(CircuitElm.getUnitText(scope.calcGridStepX(), "s")+"/div");
     }
 
     void addItemToGrid(Grid g, FocusWidget scb) {
@@ -197,7 +207,7 @@ public class ScopePropertiesDialog extends DialogBox implements ValueChangeHandl
 
 
     void scrollbarChanged() {
-        int newsp = (int) Math.pow(2, 10 - speedBar.getValue());
+        int newsp = (int)Math.pow(2,  10-speedBar.getValue());
         CirSim.console("changed " + scope.speed + " " + newsp + " " + speedBar.getValue());
         if (scope.speed != newsp)
             scope.setSpeed(newsp);
@@ -205,7 +215,7 @@ public class ScopePropertiesDialog extends DialogBox implements ValueChangeHandl
     }
 
     void updateUI() {
-        speedBar.setValue(10 - (int) Math.round(Math.log(scope.speed) / Math.log(2)));
+        speedBar.setValue(10-(int)Math.round(Math.log(scope.speed)/Math.log(2)));
         if (voltageBox != null) {
             voltageBox.setValue(scope.showV && !scope.showingValue(Scope.VAL_POWER));
             currentBox.setValue(scope.showI && !scope.showingValue(Scope.VAL_POWER));
@@ -242,7 +252,8 @@ public class ScopePropertiesDialog extends DialogBox implements ValueChangeHandl
         // if you add more here, make sure it still works with transistor scopes
     }
 
-    protected void closeDialog() {
+    protected void closeDialog()
+    {
         apply();
         this.hide();
     }
@@ -256,8 +267,7 @@ public class ScopePropertiesDialog extends DialogBox implements ValueChangeHandl
         try {
             double d = EditDialog.parseUnits(manualScaleTextBox.getText());
             scope.setManualScaleValue(d);
-        } catch (Exception e) {
-        }
+        } catch (Exception e) {}
     }
 
     public void onValueChange(ValueChangeEvent<Boolean> event) {
