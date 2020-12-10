@@ -48,11 +48,12 @@ import com.google.gwt.event.dom.client.MouseUpHandler;
 import com.google.gwt.event.dom.client.MouseUpEvent;
 import com.google.gwt.event.dom.client.MouseOutEvent;
 import com.google.gwt.event.dom.client.MouseOutHandler;
+import com.google.gwt.event.dom.client.ContextMenuEvent;
+import com.google.gwt.event.dom.client.ContextMenuHandler;
 import com.google.gwt.user.client.Event.NativePreviewEvent;
 import com.google.gwt.user.client.Event.NativePreviewHandler;
 import com.google.gwt.event.dom.client.MouseWheelEvent;
 import com.google.gwt.event.dom.client.MouseWheelHandler;
-import com.google.gwt.event.logical.shared.CloseEvent;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.client.Scheduler;
 import com.google.gwt.dom.client.Style.Unit;
@@ -79,20 +80,20 @@ import com.google.gwt.storage.client.Storage;
 import com.google.gwt.user.client.ui.PopupPanel;
 import static com.google.gwt.event.dom.client.KeyCodes.*;
 import com.google.gwt.user.client.ui.Frame;
-import com.google.gwt.user.client.Window.ClosingEvent;
 import com.google.gwt.user.client.Window.Navigator;
 
 public class CirSim implements MouseDownHandler, MouseMoveHandler, MouseUpHandler,
-        ClickHandler, NativePreviewHandler,
-        MouseOutHandler, MouseWheelHandler {
+ClickHandler, ContextMenuHandler, NativePreviewHandler, MouseOutHandler, MouseWheelHandler {
+
+    static final boolean fullVersion = false;
 
     Random random;
     Button resetButton;
     Button runStopButton;
     Button dumpMatrixButton;
     MenuItem aboutItem;
-    MenuItem exportAsTextItem, recoverItem;
-    MenuItem undoItem, redoItem;
+    MenuItem importFromLocalFileItem, importFromTextItem, exportAsTextItem, recoverItem;
+    MenuItem undoItem, redoItem, cutItem, copyItem, pasteItem, selectAllItem;
     CheckboxMenuItem dotsCheckItem;
     CheckboxMenuItem voltsCheckItem;
     CheckboxMenuItem powerCheckItem;
@@ -108,9 +109,12 @@ public class CirSim implements MouseDownHandler, MouseMoveHandler, MouseUpHandle
     private Scrollbar speedBar;
     private Scrollbar currentBar;
     private Scrollbar powerBar;
+    MenuBar elmMenuBar;
+    MenuItem elmEditMenuItem;
+    MenuItem elmScopeMenuItem;
+    MenuItem elmFlipMenuItem;
+    MenuItem elmSplitMenuItem;
     MenuBar mainMenuBar;
-    MenuItem scopeRemovePlotMenuItem;
-    MenuItem scopeSelectYMenuItem;
     ScopePopupMenu scopePopupMenu;
     static HashMap<String,String> localizationMap;
 
@@ -340,8 +344,15 @@ public class CirSim implements MouseDownHandler, MouseMoveHandler, MouseUpHandle
         menuBar = new MenuBar();
 
         fileMenuBar = new MenuBar(true);
-        exportAsTextItem = iconMenuItem("export", "Export As Text...", new MyCommand("file","exportastext"));
-        fileMenuBar.addItem(exportAsTextItem);
+        if(fullVersion){
+            importFromLocalFileItem = iconMenuItem("folder", "Open File...", new MyCommand("file","importfromlocalfile"));
+            importFromLocalFileItem.setEnabled(LoadFile.isSupported());
+            fileMenuBar.addItem(importFromLocalFileItem);
+            importFromTextItem = iconMenuItem("doc-text", "Import From Text...", new MyCommand("file","importfromtext"));
+            fileMenuBar.addItem(importFromTextItem);
+            exportAsTextItem = iconMenuItem("export", "Export As Text...", new MyCommand("file","exportastext"));
+            fileMenuBar.addItem(exportAsTextItem);
+        }
         fileMenuBar.addItem(iconMenuItem("export", "Export As Image...", new MyCommand("file","exportasimage")));
         fileMenuBar.addSeparator();
         aboutItem = iconMenuItem("info-circled", "About...", (Command)null);
@@ -352,6 +363,13 @@ public class CirSim implements MouseDownHandler, MouseMoveHandler, MouseUpHandle
         MenuBar editMenuBar = new MenuBar(true);
         editMenuBar.addItem(undoItem = menuItemWithShortcut("ccw", LS("Undo"), LS("Ctrl-Z"), new MyCommand("edit","undo")));
         editMenuBar.addItem(redoItem = menuItemWithShortcut("cw", LS("Redo"), LS("Ctrl-Y"), new MyCommand("edit","redo")));
+        if(fullVersion) {
+            editMenuBar.addItem(cutItem = menuItemWithShortcut("scissors", LS("Cut"), LS("Ctrl-X"), new MyCommand("edit", "cut")));
+            editMenuBar.addItem(copyItem = menuItemWithShortcut("copy", LS("Copy"), LS("Ctrl-C"), new MyCommand("edit", "copy")));
+            editMenuBar.addItem(pasteItem = menuItemWithShortcut("paste", LS("Paste"), LS("Ctrl-V"), new MyCommand("edit", "paste")));
+            pasteItem.setEnabled(false);
+            editMenuBar.addItem(selectAllItem = menuItemWithShortcut("select-all", LS("Select All"), LS("Ctrl-A"), new MyCommand("edit", "selectAll")));
+        }
         editMenuBar.addItem(getClassCheckItem(LS("<div style=\"display:inline-block;width:80px;\">Select</div>Space"), "Select"));
         editMenuBar.addSeparator();
         editMenuBar.addItem(iconMenuItem("target", weAreInUS() ? "Center Circuit" : "Centre Circuit", new MyCommand("edit", "centrecircuit")));
@@ -361,11 +379,13 @@ public class CirSim implements MouseDownHandler, MouseMoveHandler, MouseUpHandle
 
         // Note: some options are created but hidden from the menu.
         dotsCheckItem = new CheckboxMenuItem(LS("Show Current"));
+        dotsCheckItem.setState(fullVersion);
         voltsCheckItem = new CheckboxMenuItem(LS("Show Voltage"),
                 () -> {
                     if (voltsCheckItem.getState())
                         powerCheckItem.setState(false);
                 });
+        voltsCheckItem.setState(fullVersion);
         powerCheckItem = new CheckboxMenuItem(LS("Show Power"),
                 () -> {
                     if (powerCheckItem.getState())
@@ -477,6 +497,13 @@ public class CirSim implements MouseDownHandler, MouseMoveHandler, MouseUpHandle
         scopeCount = 0;
 
         random = new Random();
+	    elmMenuBar = new MenuBar(true);
+        elmMenuBar.addItem(elmScopeMenuItem = new MenuItem(LS("View in Scope"), new MyCommand("elm","viewInScope")));
+        if(fullVersion){
+	        elmMenuBar.addItem(elmEditMenuItem = new MenuItem(LS("Edit..."),new MyCommand("elm","edit")));
+            elmMenuBar.addItem(elmFlipMenuItem = new MenuItem(LS("Swap Terminals"), new MyCommand("elm", "flip")));
+            elmMenuBar.addItem(elmSplitMenuItem = menuItemWithShortcut("", LS("Split Wire"), LS(ctrlMetaKey + "-click"), new MyCommand("elm", "split")));
+        }
         scopePopupMenu = new ScopePopupMenu();
 
         CircuitElm.setColorScale();
@@ -489,8 +516,6 @@ public class CirSim implements MouseDownHandler, MouseMoveHandler, MouseUpHandle
             if (stopMessage == null && startCircuitLink!=null) {
                 readCircuit("");
                 getSetupList(false);
-                ImportFromDropboxDialog.setSim(this);
-                ImportFromDropboxDialog.doImportDropboxLink(startCircuitLink, false);
             } else {
                 readCircuit("");
                 if (stopMessage == null && startCircuit != null) {
@@ -503,11 +528,14 @@ public class CirSim implements MouseDownHandler, MouseMoveHandler, MouseUpHandle
         }
 
         enableUndoRedo();
+        if(fullVersion)
+            enablePaste();
         cv.addMouseDownHandler(this);
         cv.addMouseMoveHandler(this);
         cv.addMouseOutHandler(this);
         cv.addMouseUpHandler(this);
         cv.addClickHandler(this);
+        cv.addDomHandler(this, ContextMenuEvent.getType());
         menuBar.addDomHandler(event -> doMainMenuChecks(), ClickEvent.getType());
         Event.addNativePreviewHandler(this);
         cv.addMouseWheelHandler(this);
@@ -555,21 +583,169 @@ public class CirSim implements MouseDownHandler, MouseMoveHandler, MouseUpHandle
     public void composeMainMenu(MenuBar mainMenuBar) {
         mainMenuBar.addItem(getClassCheckItem(LS("Add Wire"), "WireElm"));
         mainMenuBar.addItem(getClassCheckItem(LS("Add Resistor"), "ResistorElm"));
-        mainMenuBar.addItem(getClassCheckItem(LS("Add Capacitor"), "CapacitorElm"));
-        mainMenuBar.addItem(getClassCheckItem(LS("Add Inductor"), "InductorElm"));
-        mainMenuBar.addItem(getClassCheckItem(LS("Add Switch"), "SwitchElm"));
-        mainMenuBar.addItem(getClassCheckItem(LS("Add Push Switch"), "PushSwitchElm"));
-        mainMenuBar.addItem(getClassCheckItem(LS("Add Voltage Source (2-terminal)"), "DCVoltageElm"));
-        mainMenuBar.addItem(getClassCheckItem(LS("Add Voltmeter/Scobe Probe"), "ProbeElm"));
-        mainMenuBar.addItem(getClassCheckItem(LS("Add LED"), "LEDElm"));
-        mainMenuBar.addItem(getClassCheckItem(LS("Add Lamp"), "LampElm"));
+        if(!fullVersion) {
+            mainMenuBar.addItem(getClassCheckItem(LS("Add Capacitor"), "CapacitorElm"));
+            mainMenuBar.addItem(getClassCheckItem(LS("Add Inductor"), "InductorElm"));
+            mainMenuBar.addItem(getClassCheckItem(LS("Add Transistor (bipolar, NPN)"), "NTransistorElm"));
+            mainMenuBar.addItem(getClassCheckItem(LS("Add Transistor (bipolar, PNP)"), "PTransistorElm"));
+            mainMenuBar.addItem(getClassCheckItem(LS("Add Switch"), "SwitchElm"));
+            mainMenuBar.addItem(getClassCheckItem(LS("Add Voltage Source (2-terminal)"), "DCVoltageElm"));
+            mainMenuBar.addItem(getClassCheckItem(LS("Add Current Source"), "CurrentElm"));
+            mainMenuBar.addItem(getClassCheckItem(LS("Add Voltmeter/Scobe Probe"), "ProbeElm"));
+            mainMenuBar.addItem(getClassCheckItem(LS("Add Ammeter"), "AmmeterElm"));
+            mainMenuBar.addItem(getClassCheckItem(LS("Add LED"), "LEDElm"));
+            return;
+        }
+        MenuBar passMenuBar = new MenuBar(true);
+        passMenuBar.addItem(getClassCheckItem(LS("Add Capacitor"), "CapacitorElm"));
+        passMenuBar.addItem(getClassCheckItem(LS("Add Capacitor (polarized)"), "PolarCapacitorElm"));
+        passMenuBar.addItem(getClassCheckItem(LS("Add Inductor"), "InductorElm"));
+        passMenuBar.addItem(getClassCheckItem(LS("Add Switch"), "SwitchElm"));
+        passMenuBar.addItem(getClassCheckItem(LS("Add Push Switch"), "PushSwitchElm"));
+        passMenuBar.addItem(getClassCheckItem(LS("Add SPDT Switch"), "Switch2Elm"));
+        passMenuBar.addItem(getClassCheckItem(LS("Add Potentiometer"), "PotElm"));
+        passMenuBar.addItem(getClassCheckItem(LS("Add Transformer"), "TransformerElm"));
+        passMenuBar.addItem(getClassCheckItem(LS("Add Tapped Transformer"), "TappedTransformerElm"));
+        passMenuBar.addItem(getClassCheckItem(LS("Add Transmission Line"), "TransLineElm"));
+        passMenuBar.addItem(getClassCheckItem(LS("Add Relay"), "RelayElm"));
+        passMenuBar.addItem(getClassCheckItem(LS("Add Memristor"), "MemristorElm"));
+        passMenuBar.addItem(getClassCheckItem(LS("Add Spark Gap"), "SparkGapElm"));
+        passMenuBar.addItem(getClassCheckItem(LS("Add Fuse"), "FuseElm"));
+        passMenuBar.addItem(getClassCheckItem(LS("Add Custom Transformer"), "CustomTransformerElm"));
+        passMenuBar.addItem(getClassCheckItem(LS("Add Crystal"), "CrystalElm"));
+        mainMenuBar.addItem(SafeHtmlUtils.fromTrustedString(CheckboxMenuItem.checkBoxHtml+LS("&nbsp;</div>Passive Components")), passMenuBar);
+
+        MenuBar inputMenuBar = new MenuBar(true);
+        inputMenuBar.addItem(getClassCheckItem(LS("Add Ground"), "GroundElm"));
+        inputMenuBar.addItem(getClassCheckItem(LS("Add Voltage Source (2-terminal)"), "DCVoltageElm"));
+        inputMenuBar.addItem(getClassCheckItem(LS("Add A/C Voltage Source (2-terminal)"), "ACVoltageElm"));
+        inputMenuBar.addItem(getClassCheckItem(LS("Add Voltage Source (1-terminal)"), "RailElm"));
+        inputMenuBar.addItem(getClassCheckItem(LS("Add A/C Voltage Source (1-terminal)"), "ACRailElm"));
+        inputMenuBar.addItem(getClassCheckItem(LS("Add Square Wave Source (1-terminal)"), "SquareRailElm"));
+        inputMenuBar.addItem(getClassCheckItem(LS("Add Clock"), "ClockElm"));
+        inputMenuBar.addItem(getClassCheckItem(LS("Add A/C Sweep"), "SweepElm"));
+        inputMenuBar.addItem(getClassCheckItem(LS("Add Variable Voltage"), "VarRailElm"));
+        inputMenuBar.addItem(getClassCheckItem(LS("Add Antenna"), "AntennaElm"));
+        inputMenuBar.addItem(getClassCheckItem(LS("Add AM Source"), "AMElm"));
+        inputMenuBar.addItem(getClassCheckItem(LS("Add FM Source"), "FMElm"));
+        inputMenuBar.addItem(getClassCheckItem(LS("Add Current Source"), "CurrentElm"));
+        inputMenuBar.addItem(getClassCheckItem(LS("Add Noise Generator"), "NoiseElm"));
+        inputMenuBar.addItem(getClassCheckItem(LS("Add Audio Input"), "AudioInputElm"));
+        mainMenuBar.addItem(SafeHtmlUtils.fromTrustedString(CheckboxMenuItem.checkBoxHtml+LS("&nbsp;</div>Inputs and Sources")), inputMenuBar);
+
+        MenuBar outputMenuBar = new MenuBar(true);
+        outputMenuBar.addItem(getClassCheckItem(LS("Add Analog Output"), "OutputElm"));
+        outputMenuBar.addItem(getClassCheckItem(LS("Add LED"), "LEDElm"));
+        outputMenuBar.addItem(getClassCheckItem(LS("Add Lamp"), "LampElm"));
+        outputMenuBar.addItem(getClassCheckItem(LS("Add Text"), "TextElm"));
+        outputMenuBar.addItem(getClassCheckItem(LS("Add Box"), "BoxElm"));
+        outputMenuBar.addItem(getClassCheckItem(LS("Add Voltmeter/Scobe Probe"), "ProbeElm"));
+        outputMenuBar.addItem(getClassCheckItem(LS("Add Ohmmeter"), "OhmMeterElm"));
+        outputMenuBar.addItem(getClassCheckItem(LS("Add Labeled Node"), "LabeledNodeElm"));
+        outputMenuBar.addItem(getClassCheckItem(LS("Add Test Point"), "TestPointElm"));
+        outputMenuBar.addItem(getClassCheckItem(LS("Add Ammeter"), "AmmeterElm"));
+        outputMenuBar.addItem(getClassCheckItem(LS("Add Data Export"), "DataRecorderElm"));
+        outputMenuBar.addItem(getClassCheckItem(LS("Add LED Array"), "LEDArrayElm"));
+        outputMenuBar.addItem(getClassCheckItem(LS("Add Stop Trigger"), "StopTriggerElm"));
+        mainMenuBar.addItem(SafeHtmlUtils.fromTrustedString(CheckboxMenuItem.checkBoxHtml+LS("&nbsp;</div>Outputs and Labels")), outputMenuBar);
+
+        MenuBar activeMenuBar = new MenuBar(true);
+        activeMenuBar.addItem(getClassCheckItem(LS("Add Diode"), "DiodeElm"));
+        activeMenuBar.addItem(getClassCheckItem(LS("Add Zener Diode"), "ZenerElm"));
+        activeMenuBar.addItem(getClassCheckItem(LS("Add Transistor (bipolar, NPN)"), "NTransistorElm"));
+        activeMenuBar.addItem(getClassCheckItem(LS("Add Transistor (bipolar, PNP)"), "PTransistorElm"));
+        activeMenuBar.addItem(getClassCheckItem(LS("Add MOSFET (N-Channel)"), "NMosfetElm"));
+        activeMenuBar.addItem(getClassCheckItem(LS("Add MOSFET (P-Channel)"), "PMosfetElm"));
+        activeMenuBar.addItem(getClassCheckItem(LS("Add JFET (N-Channel)"), "NJfetElm"));
+        activeMenuBar.addItem(getClassCheckItem(LS("Add JFET (P-Channel)"), "PJfetElm"));
+        activeMenuBar.addItem(getClassCheckItem(LS("Add SCR"), "SCRElm"));
+        activeMenuBar.addItem(getClassCheckItem(LS("Add DIAC"), "DiacElm"));
+        activeMenuBar.addItem(getClassCheckItem(LS("Add TRIAC"), "TriacElm"));
+        activeMenuBar.addItem(getClassCheckItem(LS("Add Darlington Pair (NPN)"), "NDarlingtonElm"));
+        activeMenuBar.addItem(getClassCheckItem(LS("Add Darlington Pair (PNP)"), "PDarlingtonElm"));
+        activeMenuBar.addItem(getClassCheckItem(LS("Add Varactor/Varicap"), "VaractorElm"));
+        activeMenuBar.addItem(getClassCheckItem(LS("Add Tunnel Diode"), "TunnelDiodeElm"));
+        activeMenuBar.addItem(getClassCheckItem(LS("Add Triode"), "TriodeElm"));
+        mainMenuBar.addItem(SafeHtmlUtils.fromTrustedString(CheckboxMenuItem.checkBoxHtml+LS("&nbsp;</div>Active Components")), activeMenuBar);
+
+        MenuBar activeBlocMenuBar = new MenuBar(true);
+        activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Op Amp (ideal, - on top)"), "OpAmpElm"));
+        activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Op Amp (ideal, + on top)"), "OpAmpSwapElm"));
+        activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Op Amp (real)"), "OpAmpRealElm"));
+        activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Analog Switch (SPST)"), "AnalogSwitchElm"));
+        activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Analog Switch (SPDT)"), "AnalogSwitch2Elm"));
+        activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Tristate Buffer"), "TriStateElm"));
+        activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Schmitt Trigger"), "SchmittElm"));
+        activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Schmitt Trigger (Inverting)"), "InvertingSchmittElm"));
+        activeBlocMenuBar.addItem(getClassCheckItem(LS("Add CCII+"), "CC2Elm"));
+        activeBlocMenuBar.addItem(getClassCheckItem(LS("Add CCII-"), "CC2NegElm"));
+        activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Comparator (Hi-Z/GND output)"), "ComparatorElm"));
+        activeBlocMenuBar.addItem(getClassCheckItem(LS("Add OTA (LM13700 style)"), "OTAElm"));
+        activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Voltage-Controlled Voltage Source"), "VCVSElm"));
+        activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Voltage-Controlled Current Source"), "VCCSElm"));
+        activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Current-Controlled Voltage Source"), "CCVSElm"));
+        activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Current-Controlled Current Source"), "CCCSElm"));
+        activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Optocoupler"), "OptocouplerElm"));
+        activeBlocMenuBar.addItem(getClassCheckItem(LS("Add Subcircuit Instance"), "CustomCompositeElm"));
+        mainMenuBar.addItem(SafeHtmlUtils.fromTrustedString(CheckboxMenuItem.checkBoxHtml+LS("&nbsp;</div>Active Building Blocks")), activeBlocMenuBar);
+
+        MenuBar gateMenuBar = new MenuBar(true);
+        gateMenuBar.addItem(getClassCheckItem(LS("Add Logic Input"), "LogicInputElm"));
+        gateMenuBar.addItem(getClassCheckItem(LS("Add Logic Output"), "LogicOutputElm"));
+        gateMenuBar.addItem(getClassCheckItem(LS("Add Inverter"), "InverterElm"));
+        gateMenuBar.addItem(getClassCheckItem(LS("Add NAND Gate"), "NandGateElm"));
+        gateMenuBar.addItem(getClassCheckItem(LS("Add NOR Gate"), "NorGateElm"));
+        gateMenuBar.addItem(getClassCheckItem(LS("Add AND Gate"), "AndGateElm"));
+        gateMenuBar.addItem(getClassCheckItem(LS("Add OR Gate"), "OrGateElm"));
+        gateMenuBar.addItem(getClassCheckItem(LS("Add XOR Gate"), "XorGateElm"));
+        mainMenuBar.addItem(SafeHtmlUtils.fromTrustedString(CheckboxMenuItem.checkBoxHtml+LS("&nbsp;</div>Logic Gates, Input and Output")), gateMenuBar);
+
+        MenuBar chipMenuBar = new MenuBar(true);
+        chipMenuBar.addItem(getClassCheckItem(LS("Add D Flip-Flop"), "DFlipFlopElm"));
+        chipMenuBar.addItem(getClassCheckItem(LS("Add JK Flip-Flop"), "JKFlipFlopElm"));
+        chipMenuBar.addItem(getClassCheckItem(LS("Add T Flip-Flop"), "TFlipFlopElm"));
+        chipMenuBar.addItem(getClassCheckItem(LS("Add 7 Segment LED"), "SevenSegElm"));
+        chipMenuBar.addItem(getClassCheckItem(LS("Add 7 Segment Decoder"), "SevenSegDecoderElm"));
+        chipMenuBar.addItem(getClassCheckItem(LS("Add Multiplexer"), "MultiplexerElm"));
+        chipMenuBar.addItem(getClassCheckItem(LS("Add Demultiplexer"), "DeMultiplexerElm"));
+        chipMenuBar.addItem(getClassCheckItem(LS("Add SIPO shift register"), "SipoShiftElm"));
+        chipMenuBar.addItem(getClassCheckItem(LS("Add PISO shift register"), "PisoShiftElm"));
+        chipMenuBar.addItem(getClassCheckItem(LS("Add Counter"), "CounterElm"));
+        chipMenuBar.addItem(getClassCheckItem(LS("Add Ring Counter"), "DecadeElm"));
+        chipMenuBar.addItem(getClassCheckItem(LS("Add Latch"), "LatchElm"));
+        //chipMenuBar.addItem(getClassCheckItem("Add Static RAM", "SRAMElm"));
+        chipMenuBar.addItem(getClassCheckItem(LS("Add Sequence generator"), "SeqGenElm"));
+        chipMenuBar.addItem(getClassCheckItem(LS("Add Full Adder"), "FullAdderElm"));
+        chipMenuBar.addItem(getClassCheckItem(LS("Add Half Adder"), "HalfAdderElm"));
+        chipMenuBar.addItem(getClassCheckItem(LS("Add Custom Logic"), "UserDefinedLogicElm")); // don't change this, it will break people's saved shortcuts
+        chipMenuBar.addItem(getClassCheckItem(LS("Add Static RAM"), "SRAMElm"));
+        mainMenuBar.addItem(SafeHtmlUtils.fromTrustedString(CheckboxMenuItem.checkBoxHtml+LS("&nbsp;</div>Digital Chips")), chipMenuBar);
+
+        MenuBar achipMenuBar = new MenuBar(true);
+        achipMenuBar.addItem(getClassCheckItem(LS("Add 555 Timer"), "TimerElm"));
+        achipMenuBar.addItem(getClassCheckItem(LS("Add Phase Comparator"), "PhaseCompElm"));
+        achipMenuBar.addItem(getClassCheckItem(LS("Add DAC"), "DACElm"));
+        achipMenuBar.addItem(getClassCheckItem(LS("Add ADC"), "ADCElm"));
+        achipMenuBar.addItem(getClassCheckItem(LS("Add VCO"), "VCOElm"));
+        achipMenuBar.addItem(getClassCheckItem(LS("Add Monostable"), "MonostableElm"));
+        mainMenuBar.addItem(SafeHtmlUtils.fromTrustedString(CheckboxMenuItem.checkBoxHtml+LS("&nbsp;</div>Analog and Hybrid Chips")), achipMenuBar);
     }
 
     CheckboxMenuItem getClassCheckItem(String s, String t) {
+        String shortcut = "";
         CircuitElm elm = constructElement(t, 0, 0);
         CheckboxMenuItem mi;
-
-        mi= new CheckboxMenuItem(s);
+        if (fullVersion && elm!=null) {
+            if (elm.needsShortcut() ) {
+                shortcut += (char)elm.getShortcut();
+                shortcuts[elm.getShortcut()]=t;
+            }
+            elm.delete();
+        }
+        if (shortcut=="")
+            mi= new CheckboxMenuItem(s);
+        else
+            mi = new CheckboxMenuItem(s, shortcut);
         mi.setScheduledCommand(new MyCommand("main", t) );
         mainMenuItems.add(mi);
         mainMenuItemNames.add(t);
@@ -828,6 +1004,8 @@ public class CirSim implements MouseDownHandler, MouseMoveHandler, MouseUpHandle
         int ct = scopeCount;
         if (stopMessage != null)
             ct = 0;
+        for (i = 0; i != ct; i++)
+            scopes[i].draw(g);
         if (mouseWasOverSplitter) {
             g.setColor(Color.cyan);
             g.setLineWidth(4.0);
@@ -840,10 +1018,20 @@ public class CirSim implements MouseDownHandler, MouseMoveHandler, MouseUpHandle
             g.drawString(stopMessage, 10, circuitArea.height-10);
         } else {
             String info[] = new String[10];
+            if (fullVersion && mouseElm != null) {
+                if (mousePost == -1) {
+                    mouseElm.getInfo(info);
+                    info[0] = LS(info[0]);
+                    if (info[1] != null)
+                        info[1] = LS(info[1]);
+                } else
+                    info[0] = "V = " +
+                            CircuitElm.getUnitText(mouseElm.getPostVoltage(mousePost), "V");
 
-            info[0] = "t = " + CircuitElm.getTimeText(t);
-            info[1] = LS("time step = ") + CircuitElm.getTimeText(timeStep);
-
+            } else {
+                info[0] = "t = " + CircuitElm.getTimeText(t);
+                info[1] = LS("time step = ") + CircuitElm.getTimeText(timeStep);
+            }
             if (hintType != -1) {
                 for (i = 0; info[i] != null; i++)
                     ;
@@ -2025,6 +2213,8 @@ public class CirSim implements MouseDownHandler, MouseMoveHandler, MouseUpHandle
                 getElm(i).stepFinished();
             if (!delayWireProcessing)
                 calcWireCurrents();
+            for (i = 0; i != scopeCount; i++)
+                scopes[i].timeStep();
             for (i=0; i != elmList.size(); i++)
                 if (getElm(i) instanceof ScopeElm )
                     ((ScopeElm)getElm(i)).stepScope();
@@ -2136,16 +2326,29 @@ public class CirSim implements MouseDownHandler, MouseMoveHandler, MouseUpHandle
             menu = "elm";
         }
 
+        if (item == "cut" && fullVersion) {
+            if (menu!="elm")
+                menuElm = null;
+            doCut();
+        }
+        if (item == "copy" && fullVersion) {
+            if (menu!="elm")
+                menuElm = null;
+            doCopy();
+        }
+        if (item=="paste" && fullVersion)
+            doPaste(null);
+        if (item=="duplicate") {
+            if (menu!="elm")
+                menuElm = null;
+            doDuplicate();
+        }
         if (item=="flip")
             doFlip();
         if (item=="split")
             doSplit(menuElm);
         if (item=="selectAll")
             doSelectAll();
-        //	if (e.getSource() == exitItem) {
-        //	    destroyFrame();
-        //	    return;
-        //	}
 
         if (item=="centrecircuit") {
             pushUndo();
@@ -2157,6 +2360,14 @@ public class CirSim implements MouseDownHandler, MouseMoveHandler, MouseUpHandle
             zoomCircuit(-20);
         if (item=="zoom100")
             setCircuitScale(1);
+        if (menu=="elm" && item=="edit" && fullVersion)
+            doEdit(menuElm);
+        if (item=="delete" && fullVersion) {
+            if (menu!="elm")
+                menuElm = null;
+            pushUndo();
+            doDelete(true);
+        }
 
         if (item=="viewInScope" && menuElm != null) {
             int i;
@@ -2190,6 +2401,15 @@ public class CirSim implements MouseDownHandler, MouseMoveHandler, MouseUpHandle
             else
                 s= ((ScopeElm)mouseElm).elmScope;
 
+            if (item=="dock") {
+                if (scopeCount == scopes.length)
+                    return;
+                scopes[scopeCount] = ((ScopeElm)mouseElm).elmScope;
+                ((ScopeElm)mouseElm).clearElmScope();
+                scopes[scopeCount].position = scopeCount;
+                scopeCount++;
+                doDelete(false);
+            }
             if (item=="undock") {
                 ScopeElm newScope = new ScopeElm(snapGrid(menuElm.x+50), snapGrid(menuElm.y+50));
                 elmList.addElement(newScope);
@@ -2223,7 +2443,7 @@ public class CirSim implements MouseDownHandler, MouseMoveHandler, MouseUpHandle
                 s.selectY();
             if (item=="reset")
                 s.resetGraph(true);
-            if (item=="properties")
+            if (item=="properties" && fullVersion)
                 s.properties();
             deleteUnusedScopeElms();
         }
@@ -2310,6 +2530,17 @@ public class CirSim implements MouseDownHandler, MouseMoveHandler, MouseUpHandle
         scopes[s].setElm(null);
     }
 
+    void doEdit(Editable eable) {
+        clearSelection();
+        pushUndo();
+        if (editDialog != null) {
+            //		requestFocus();
+            editDialog.setVisible(false);
+            editDialog = null;
+        }
+        editDialog = new EditDialog(eable, this);
+        editDialog.show();
+    }
 
     void doExportAsUrl()
     {
@@ -2415,7 +2646,8 @@ public class CirSim implements MouseDownHandler, MouseMoveHandler, MouseUpHandle
         int stackptr = 0;
         currentMenuBar=new MenuBar(true);
         currentMenuBar.setAutoOpen(true);
-        //menuBar.addItem(LS("Circuits"), currentMenuBar);
+        if(fullVersion)
+            menuBar.addItem(LS("Circuits"), currentMenuBar);
         stack[stackptr++] = currentMenuBar;
         int p;
         for (p = 0; p < len; ) {
@@ -2528,10 +2760,10 @@ public class CirSim implements MouseDownHandler, MouseMoveHandler, MouseUpHandle
             elmList.removeAllElements();
             hintType = -1;
             timeStep = 5e-6;
-            dotsCheckItem.setState(false);
+            dotsCheckItem.setState(fullVersion);
             smallGridCheckItem.setState(false);
             powerCheckItem.setState(false);
-            voltsCheckItem.setState(false);
+            voltsCheckItem.setState(fullVersion);
             showValuesCheckItem.setState(true);
             setGrid();
             speedBar.setValue(117); // 57
@@ -2589,8 +2821,8 @@ public class CirSim implements MouseDownHandler, MouseMoveHandler, MouseUpHandle
                         break;
                     }
                     if (tint == 38) {
-                        Adjustable adj = new Adjustable(st, this);
-                        adjustables.add(adj);
+                        //Adjustable adj = new Adjustable(st, this);
+                        //adjustables.add(adj);
                         break;
                     }
                     if (tint == '.') {
@@ -2634,20 +2866,6 @@ public class CirSim implements MouseDownHandler, MouseMoveHandler, MouseUpHandle
         AudioInputElm.clearCache();  // to save memory
     }
 
-    // delete sliders for an element
-    void deleteSliders(CircuitElm elm) {
-        int i;
-        if (adjustables == null)
-            return;
-        for (i = adjustables.size()-1; i >= 0; i--) {
-            Adjustable adj = adjustables.get(i);
-            if (adj.elm == elm) {
-                adj.deleteSlider(this);
-                adjustables.remove(i);
-            }
-        }
-    }
-
     void readHint(StringTokenizer st) {
         hintType  = new Integer(st.nextToken()).intValue();
         hintItem1 = new Integer(st.nextToken()).intValue();
@@ -2657,9 +2875,9 @@ public class CirSim implements MouseDownHandler, MouseMoveHandler, MouseUpHandle
     void readOptions(StringTokenizer st) {
         int flags = new Integer(st.nextToken()).intValue();
 
-        dotsCheckItem.setState(false);
+        dotsCheckItem.setState(fullVersion);
         smallGridCheckItem.setState(false);
-        voltsCheckItem.setState(false);
+        voltsCheckItem.setState(fullVersion);
         powerCheckItem.setState(false);
         showValuesCheckItem.setState(true);
 
@@ -3094,6 +3312,17 @@ public class CirSim implements MouseDownHandler, MouseMoveHandler, MouseUpHandle
         }
         scopeSelected = -1;
         if (newMouseElm == null) {
+            for (i = 0; i != scopeCount; i++) {
+                Scope s = scopes[i];
+                if (s.rect.contains(sx, sy)) {
+                    newMouseElm=s.getElm();
+                    if (s.plotXY) {
+                        plotXElm = s.getXElm();
+                        plotYElm = s.getYElm();
+                    }
+                    scopeSelected = i;
+                }
+            }
             //	    // the mouse pointer was not in any of the bounding boxes, but we
             //	    // might still be close to a post
             for (i = 0; i != elmList.size(); i++) {
@@ -3128,6 +3357,45 @@ public class CirSim implements MouseDownHandler, MouseMoveHandler, MouseUpHandle
         }
         repaint();
         setMouseElm(newMouseElm);
+    }
+
+    public void onContextMenu(ContextMenuEvent e) {
+    	e.preventDefault();
+    	menuClientX = e.getNativeEvent().getClientX();
+    	menuClientY = e.getNativeEvent().getClientY();
+    	doPopupMenu();
+    }
+
+    void doPopupMenu() {
+    	menuElm = mouseElm;
+    	menuScope=-1;
+    	menuPlot=-1;
+    	int x, y;
+    	if(scopeSelected != -1)
+    	    return;
+
+    	if (mouseElm != null) {
+    	    if (! (mouseElm instanceof ScopeElm)) {
+    	        elmScopeMenuItem.setEnabled(mouseElm.canViewInScope());
+    	        if(fullVersion) {
+                    elmEditMenuItem.setEnabled(fullVersion && (mouseElm.getEditInfo(0) != null));
+                    elmFlipMenuItem.setEnabled(fullVersion && (mouseElm.getPostCount() == 2));
+                    elmSplitMenuItem.setEnabled(fullVersion && canSplit(mouseElm));
+                }
+    	        contextPanel=new PopupPanel(true);
+    	        contextPanel.add(elmMenuBar);
+    	        contextPanel.setPopupPosition(menuClientX, menuClientY);
+    	        contextPanel.show();
+    	    }
+    	} else {
+    		doMainMenuChecks();
+    		contextPanel=new PopupPanel(true);
+    		contextPanel.add(mainMenuBar);
+    		x=Math.max(0, Math.min(menuClientX, cv.getCoordinateSpaceWidth()-400));
+    		y=Math.max(0, Math.min(menuClientY,cv.getCoordinateSpaceHeight()-450));
+    		contextPanel.setPopupPosition(x,y);
+    		contextPanel.show();
+    	}
     }
 
     boolean canSplit(CircuitElm ce) {
@@ -3185,6 +3453,11 @@ public class CirSim implements MouseDownHandler, MouseMoveHandler, MouseUpHandle
         menuY = menuClientY = e.getY();
         mouseDownTime = System.currentTimeMillis();
 
+        // maybe someone did copy in another window?  should really do this when
+        // window receives focus
+        if(fullVersion)
+            enablePaste();
+
         if (e.getNativeButton() != NativeEvent.BUTTON_LEFT && e.getNativeButton() != NativeEvent.BUTTON_MIDDLE)
             return;
 
@@ -3222,7 +3495,8 @@ public class CirSim implements MouseDownHandler, MouseMoveHandler, MouseUpHandle
                 s=scopes[scopeSelected];
             else
                 s=((ScopeElm)mouseElm).elmScope;
-            s.properties();
+            if(fullVersion)
+                s.properties();
             clearSelection();
             mouseDragging=false;
             return;
@@ -3443,6 +3717,25 @@ public class CirSim implements MouseDownHandler, MouseMoveHandler, MouseUpHandle
         }
     }
 
+    void doCut() {
+        int i;
+        pushUndo();
+        setMenuSelection();
+        clipboard = "";
+        for (i = elmList.size()-1; i >= 0; i--) {
+            CircuitElm ce = getElm(i);
+            // ScopeElms don't cut-paste well because their reference to a parent
+            // elm by number get's messed up in the dump. For now we will just ignore them
+            // until I can be bothered to come up with something better
+            if (willDelete(ce) && !(ce instanceof ScopeElm) ) {
+                clipboard += ce.dump() + "\n";
+            }
+        }
+        writeClipboardToStorage();
+        doDelete(true);
+        enablePaste();
+    }
+
     void writeClipboardToStorage() {
         Storage stor = Storage.getLocalStorageIfSupported();
         if (stor == null)
@@ -3486,6 +3779,29 @@ public class CirSim implements MouseDownHandler, MouseMoveHandler, MouseUpHandle
 
     }
 
+    void doDelete(boolean pushUndoFlag) {
+        int i;
+        if (pushUndoFlag)
+            pushUndo();
+        boolean hasDeleted = false;
+
+        for (i = elmList.size()-1; i >= 0; i--) {
+            CircuitElm ce = getElm(i);
+            if (willDelete(ce)) {
+                if (ce.isMouseElm())
+                    setMouseElm(null);
+                ce.delete();
+                elmList.removeElementAt(i);
+                hasDeleted = true;
+            }
+        }
+        if ( hasDeleted ) {
+            deleteUnusedScopeElms();
+            needAnalyze();
+            writeRecoveryToStorage();
+        }
+    }
+
     boolean willDelete( CircuitElm ce ) {
         // Is this element in the list to be deleted.
         // This changes the logic from the previous version which would initially only
@@ -3512,6 +3828,109 @@ public class CirSim implements MouseDownHandler, MouseMoveHandler, MouseUpHandle
                 r += ce.dump() + "\n";
         }
         return r;
+    }
+
+    void doCopy() {
+        // clear selection when we're done if we're copying a single element using the context menu
+        boolean clearSel = (menuElm != null && !menuElm.selected);
+
+        setMenuSelection();
+        clipboard=copyOfSelectedElms();
+
+        if (clearSel)
+            clearSelection();
+
+        writeClipboardToStorage();
+        enablePaste();
+    }
+
+    void enablePaste() {
+        if (clipboard == null || clipboard.length() == 0)
+            readClipboardFromStorage();
+        pasteItem.setEnabled(clipboard != null && clipboard.length() > 0);
+    }
+
+    void doDuplicate() {
+        String s;
+        setMenuSelection();
+        s=copyOfSelectedElms();
+        doPaste(s);
+    }
+
+    void doPaste(String dump) {
+        pushUndo();
+        clearSelection();
+        int i;
+        Rectangle oldbb = null;
+
+        // get old bounding box
+        for (i = 0; i != elmList.size(); i++) {
+            CircuitElm ce = getElm(i);
+            Rectangle bb = ce.getBoundingBox();
+            if (oldbb != null)
+                oldbb = oldbb.union(bb);
+            else
+                oldbb = bb;
+        }
+
+        // add new items
+        int oldsz = elmList.size();
+        if (dump != null)
+            readCircuit(dump, RC_RETAIN);
+        else {
+            readClipboardFromStorage();
+            readCircuit(clipboard, RC_RETAIN);
+        }
+
+        // select new items and get their bounding box
+        Rectangle newbb = null;
+        for (i = oldsz; i != elmList.size(); i++) {
+            CircuitElm ce = getElm(i);
+            ce.setSelected(true);
+            Rectangle bb = ce.getBoundingBox();
+            if (newbb != null)
+                newbb = newbb.union(bb);
+            else
+                newbb = bb;
+        }
+
+        if (oldbb != null && newbb != null && oldbb.intersects(newbb)) {
+            // find a place on the edge for new items
+            int dx = 0, dy = 0;
+            int spacew = circuitArea.width - oldbb.width - newbb.width;
+            int spaceh = circuitArea.height - oldbb.height - newbb.height;
+            if (spacew > spaceh)
+                dx = snapGrid(oldbb.x + oldbb.width  - newbb.x + gridSize);
+            else
+                dy = snapGrid(oldbb.y + oldbb.height - newbb.y + gridSize);
+
+            // move new items near the mouse if possible
+            if (mouseCursorX > 0 && circuitArea.contains(mouseCursorX, mouseCursorY)) {
+                int gx = inverseTransformX(mouseCursorX);
+                int gy = inverseTransformY(mouseCursorY);
+                int mdx = snapGrid(gx-(newbb.x+newbb.width/2));
+                int mdy = snapGrid(gy-(newbb.y+newbb.height/2));
+                for (i = oldsz; i != elmList.size(); i++) {
+                    if (!getElm(i).allowMove(mdx, mdy))
+                        break;
+                }
+                if (i == elmList.size()) {
+                    dx = mdx;
+                    dy = mdy;
+                }
+            }
+
+            // move the new items
+            for (i = oldsz; i != elmList.size(); i++) {
+                CircuitElm ce = getElm(i);
+                ce.move(dx, dy);
+            }
+
+            // center circuit
+            //	handleResize();
+        }
+        needAnalyze();
+        writeRecoveryToStorage();
     }
 
     void clearSelection() {
@@ -3584,6 +4003,18 @@ public class CirSim implements MouseDownHandler, MouseMoveHandler, MouseUpHandle
             return;
         }
         if ((t & Event.ONKEYDOWN)!=0) {
+            if (code==KEY_BACKSPACE || code==KEY_DELETE) {
+                if (scopeSelected != -1) {
+                    // Treat DELETE key with scope selected as "remove scope", not delete
+                    scopes[scopeSelected].setElm(null);
+                    scopeSelected = -1;
+                } else if(fullVersion) {
+                    menuElm = null;
+                    pushUndo();
+                    doDelete(true);
+                    e.cancel();
+                }
+            }
             if (code==KEY_ESCAPE){
                 setMouseMode(MODE_SELECT);
                 mouseModeStr = "Select";
@@ -3592,12 +4023,30 @@ public class CirSim implements MouseDownHandler, MouseMoveHandler, MouseUpHandle
             }
 
             if (e.getNativeEvent().getCtrlKey() || e.getNativeEvent().getMetaKey()) {
+                if(fullVersion) {
+                    if (code == KEY_C) {
+                        menuPerformed("key", "copy");
+                        e.cancel();
+                    }
+                    if (code == KEY_X) {
+                        menuPerformed("key", "cut");
+                        e.cancel();
+                    }
+                    if (code == KEY_V) {
+                        menuPerformed("key", "paste");
+                        e.cancel();
+                    }
+                }
                 if (code==KEY_Z) {
                     menuPerformed("key", "undo");
                     e.cancel();
                 }
                 if (code==KEY_Y) {
                     menuPerformed("key", "redo");
+                    e.cancel();
+                }
+                if (code==KEY_A) {
+                    menuPerformed("key", "selectAll");
                     e.cancel();
                 }
             }
@@ -3616,6 +4065,15 @@ public class CirSim implements MouseDownHandler, MouseMoveHandler, MouseUpHandle
                 e.cancel();
             }
 
+            if (fullVersion && cc>32 && cc<127){
+                String c=shortcuts[cc];
+                e.cancel();
+                if (c==null)
+                    return;
+                setMouseMode(MODE_ADD_ELM);
+                mouseModeStr=c;
+                tempMouseMode = mouseMode;
+            }
             if (cc==32) {
                 setMouseMode(MODE_SELECT);
                 mouseModeStr = "Select";
