@@ -15,115 +15,18 @@
         <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
         <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
       </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:pr" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:wyh" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:wyh" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:wyh" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:npm_and_yarn" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:wyh" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:dependabot" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:npm_and_yarn" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:app" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
-      <path>
-        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:wyh" type="e8cecc67:BranchNodeDescriptor" />
-        <item name="GROUP_NODE:pr" type="e8cecc67:BranchNodeDescriptor" />
-      </path>
     </expand>
-    <select />
+    <select>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="BRANCH:master" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </select>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5bfd321d-7bad-499f-a573-47205b0f6d75" name="Default Changelist" comment="remove functionalities">
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/gwt_user.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/gwt_user.xml" afterDir="false" />
+    <list default="true" id="5bfd321d-7bad-499f-a573-47205b0f6d75" name="Default Changelist" comment="add menu items">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/circuitjs1.iml" beforeDir="false" afterPath="$PROJECT_DIR$/circuitjs1.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/Adjustable.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/Adjustable.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/AntennaElm.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/AntennaElm.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/CirSim$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/CirSim$10.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/CirSim$11.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/CirSim$11.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/CirSim$12.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/CirSim$12.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/CirSim$13.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/CirSim$13.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/CirSim$14.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/CirSim$14.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/CirSim$15.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/CirSim$15.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/CirSim$16.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/CirSim$16.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/CirSim$17.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/CirSim$17.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/CirSim$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/CirSim$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/CirSim$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/CirSim$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/CirSim$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/CirSim$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/CirSim$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/CirSim$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/CirSim$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/CirSim$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/CirSim$8.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/CirSim$8.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/CirSim$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/CirSim$9.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/CirSim.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/CirSim.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/CircuitElm.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/CircuitElm.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/Color.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/Color.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/CompositeElm.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/CompositeElm.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/CustomLogicModel.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/CustomLogicModel.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/CustomTransformerElm.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/CustomTransformerElm.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/Diode.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/Diode.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/EditDialog$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/EditDialog$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/EditDialog$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/EditDialog$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/EditDialog$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/EditDialog$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/EditDialog$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/EditDialog$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/EditDialog$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/EditDialog$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/EditDialog$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/EditDialog$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/EditDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/EditDialog.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/GateElm.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/GateElm.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/LEDArrayElm.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/LEDArrayElm.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/LEDElm.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/LEDElm.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/MultiplexerElm.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/MultiplexerElm.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/OpenSwitchElm.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/OpenSwitchElm.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/OpenWireElm.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/OpenWireElm.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/PotElm.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/PotElm.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/RelayElm.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/RelayElm.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/Scope.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/Scope.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/ScopeCheckBox.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/ScopeCheckBox.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/ScopeElm.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/ScopeElm.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/ScopePlot.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/ScopePlot.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/ScopePropertiesDialog$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/ScopePropertiesDialog$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/ScopePropertiesDialog$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/ScopePropertiesDialog$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/ScopePropertiesDialog$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/ScopePropertiesDialog$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/ScopePropertiesDialog$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/ScopePropertiesDialog$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/ScopePropertiesDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/ScopePropertiesDialog.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/SevenSegElm.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/SevenSegElm.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/ShortWireElm.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/ShortWireElm.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/TappedTransformerElm.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/TappedTransformerElm.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/TransformerElm.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/TransformerElm.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/TransistorElm.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/TransistorElm.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/VCCSElm.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/VCCSElm.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/VarRailElm.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/VarRailElm.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/VoltageElm.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/VoltageElm.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/circuitjs1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/circuitjs1$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/circuitjs1$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/circuitjs1$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/circuitjs1.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/circuitjs1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/public/circuits/ohms.txt" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/public/circuits/ohms.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/circuitjs1/circuitjs1.nocache.js" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/circuitjs1/circuitjs1.nocache.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/circuitjs1/compilation-mappings.txt" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/circuitjs1/compilation-mappings.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/lushprojects/circuitjs1/client/CirSim.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/lushprojects/circuitjs1/client/CirSim.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -190,7 +93,7 @@
       <workItem from="1607583558725" duration="8000" />
       <workItem from="1607585611367" duration="567000" />
       <workItem from="1607652681044" duration="2674000" />
-      <workItem from="1607678080489" duration="1181000" />
+      <workItem from="1607678080489" duration="1970000" />
     </task>
     <task id="LOCAL-00001" summary="remove functionalities">
       <created>1607244096729</created>
@@ -199,7 +102,14 @@
       <option name="project" value="LOCAL" />
       <updated>1607244096729</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="add menu items">
+      <created>1607679634885</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1607679634885</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -216,7 +126,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="origin/master" />
+                        <option value="master" />
                       </list>
                     </value>
                   </entry>
@@ -231,7 +141,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="remove functionalities" />
-    <option name="LAST_COMMIT_MESSAGE" value="remove functionalities" />
+    <MESSAGE value="add menu items" />
+    <option name="LAST_COMMIT_MESSAGE" value="add menu items" />
   </component>
   <component name="WindowStateProjectService">
     <state x="128" y="0" width="1071" height="673" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1607678375696">
@@ -254,10 +165,10 @@
       <screen x="0" y="0" width="1366" height="696" />
     </state>
     <state x="421" y="138" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1366.696@0.0.1366.696" timestamp="1606554773466" />
-    <state x="0" y="-22" width="1366" height="790" maximized="true" key="DiffContextDialog" timestamp="1607678994820">
+    <state x="0" y="23" width="1366" height="673" maximized="true" key="DiffContextDialog" timestamp="1607679680293">
       <screen x="0" y="23" width="1366" height="673" />
     </state>
-    <state x="0" y="-22" width="1366" height="790" maximized="true" key="DiffContextDialog/0.23.1366.673@0.23.1366.673" timestamp="1607678994820" />
+    <state x="0" y="23" width="1366" height="673" maximized="true" key="DiffContextDialog/0.23.1366.673@0.23.1366.673" timestamp="1607679680293" />
     <state x="539" y="226" key="FileChooserDialogImpl" timestamp="1607652724037">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
@@ -348,10 +259,11 @@
       <screen x="0" y="23" width="1366" height="673" />
     </state>
     <state x="100" y="80" width="1166" height="588" key="ShowDiffWithBranchDialog/0.23.1366.673@0.23.1366.673" timestamp="1607345940768" />
-    <state x="283" y="124" key="Vcs.Push.Dialog.v2" timestamp="1607244104722">
-      <screen x="0" y="0" width="1366" height="696" />
+    <state x="283" y="143" key="Vcs.Push.Dialog.v2" timestamp="1607679686132">
+      <screen x="0" y="23" width="1366" height="673" />
     </state>
     <state x="283" y="124" key="Vcs.Push.Dialog.v2/0.0.1366.696@0.0.1366.696" timestamp="1607244104722" />
+    <state x="283" y="143" key="Vcs.Push.Dialog.v2/0.23.1366.673@0.23.1366.673" timestamp="1607679686132" />
     <state x="204" y="181" key="caller.chooser.dialog" timestamp="1606555207820">
       <screen x="0" y="0" width="1366" height="696" />
     </state>
