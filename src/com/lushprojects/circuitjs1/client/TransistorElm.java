@@ -397,7 +397,7 @@ class TransistorElm extends CircuitElm {
     }
 
     @Override
-    void shortFlipElement(CirSim cs, int mal) {
+    void shortFlipElement(int mal) {
         if (!shorted) {
             int x1, y1, x2, y2;
             if (mal == 0) {
@@ -419,15 +419,14 @@ class TransistorElm extends CircuitElm {
                 y2 = point1.y;
             }
             shortWire = new ShortWireElm(x1, y1, x2, y2, flags, null);
-            shortWire.settled = settled;
             shortWire.main = this;
             shortWire.setPoints();
-            cs.elmList.add(shortWire);
+            sim.elmList.add(shortWire);
             shorted = true;
             seed = mal;
         }
         else {
-            cs.elmList.removeElement(shortWire);
+            sim.elmList.removeElement(shortWire);
             shorted = false;
             seed = -1;
         }
@@ -435,7 +434,7 @@ class TransistorElm extends CircuitElm {
 
     OpenWireElm openWire;
     @Override
-    void openFlipElement(CirSim cs, int mal) {
+    void openFlipElement(int mal) {
         int hs = 16;
         if (!opened) {
             setVisualPosition();
@@ -470,23 +469,21 @@ class TransistorElm extends CircuitElm {
                     wx2 -= sign * hs;
                 }
                 openWire = new OpenWireElm(wx1, wy1, wx2, wy2, flags, null);
-                openWire.settled = settled;
                 openWire.main = this;
                 openWire.setPoints();
-                cs.elmList.addElement(openWire);
+                sim.elmList.addElement(openWire);
             }
             openSwitch = new OpenSwitchElm(swx1, swy1, swx2, swy2, flags);
-            openSwitch.settled = settled;
             openSwitch.main = this;
             openSwitch.setPoints();
-            cs.elmList.addElement(openSwitch);
+            sim.elmList.addElement(openSwitch);
             opened = true;
         }
         else {
             lengthen();
-            cs.elmList.removeElement(openSwitch);
+            sim.elmList.removeElement(openSwitch);
             if (seed != 3) {
-                cs.elmList.removeElement(openWire);
+                sim.elmList.removeElement(openWire);
             }
             opened = false;
             seed = -1;
@@ -530,25 +527,26 @@ class TransistorElm extends CircuitElm {
         setPoints();
     }
 
+    @Override
     void drawOpened(Graphics g) {
         // now the position is moved, move back and draw
-        if (!supervisor) {
+        if (!sim.supervisor || !sim.fullVersion) {
             lengthen();
         }
         draw(g);
-        if (!supervisor) {
+        if (!sim.supervisor || !sim.fullVersion) {
             shorten();
         }
     }
 
     @Override
-    void malfunction(CirSim cs, int seed) {
+    void malfunction(int seed) {
         this.seed = seed;
         if (seed == 0 || seed == 1 || seed == 2) {
-            shortFlipElement(cs, seed);
+            shortFlipElement(seed);
         }
         else if (seed == 3 || seed == 4 || seed == 5) {
-            openFlipElement(cs, seed);
+            openFlipElement(seed);
         }
     }
 

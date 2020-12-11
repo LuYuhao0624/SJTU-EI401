@@ -88,8 +88,8 @@ class GroundElm extends CircuitElm {
     }
 
     @Override
-    void shortFlipElement(CirSim cs, int mal) {}
+    void shortFlipElement(int mal) {}
 
     @Override
-    void openFlipElement(CirSim cs, int mal) {}
+    void openFlipElement(int mal) {}
 }

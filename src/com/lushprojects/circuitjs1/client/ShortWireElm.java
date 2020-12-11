@@ -5,11 +5,12 @@ public class ShortWireElm extends WireElm {
     public ShortWireElm(int xa, int ya, int xb, int yb, int f,
                    StringTokenizer st) {
         super(xa, ya, xb, yb, f, st);
+        settled = true;
     }
 
     @Override
     void draw(Graphics g) {
-        if (supervisor) {
+        if (sim.supervisor && sim.fullVersion) {
             super.draw(g);
         }
     }
@@ -20,10 +21,10 @@ public class ShortWireElm extends WireElm {
     }
 
     @Override
-    void shortFlipElement(CirSim cs, int mal) {}
+    void shortFlipElement(int mal) {}
 
     @Override
-    void openFlipElement(CirSim cs, int mal) {}
+    void openFlipElement(int mal) {}
 
 //    @Override
 //    void setBbox(int x1, int y1, int x2, int y2) {}
@@ -45,6 +46,9 @@ public class ShortWireElm extends WireElm {
     @Override
     void setMouseElm(boolean v) {
         mouseElmRef = main;
+    }
+    void getInfo(String arr[]) {
+        arr[0] = "SW";
     }
 
 }

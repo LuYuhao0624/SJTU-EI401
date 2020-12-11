@@ -6,7 +6,8 @@
 "&nbsp;</div>Active Components"="&nbsp;</div>Aktive Bauteile"
 "&nbsp;</div>Analog and Hybrid Chips"="&nbsp;</div>Analoge und hybride Chips"
 "&nbsp;</div>Digital Chips"="&nbsp;</div>Digitale Chips"
-"&nbsp;</div>Drag"="&nbsp;</div>Ziehen"
+"&nbsp;</div>
+Drag"="&nbsp;</div>Ziehen"
 "&nbsp;</div>Inputs and Sources"="&nbsp;</div>Eingänge und Quellen"
 "&nbsp;</div>Logic Gates, Input and Output"="&nbsp;</div>Logikgatter, logische Ein-/Ausgänge"
 "&nbsp;</div>Outputs and Labels"="&nbsp;</div>Ausgänge, Messgeräte, Text"

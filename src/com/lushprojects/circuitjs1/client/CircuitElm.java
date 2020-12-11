@@ -1040,7 +1040,7 @@ public abstract class CircuitElm implements Editable {
     }
 
     boolean isSelected() {
-        if (!settled || supervisor) {
+        if (!settled || (sim.supervisor && sim.fullVersion)) {
             return selected;
         }
         else {
@@ -1053,13 +1053,13 @@ public abstract class CircuitElm implements Editable {
     }
 
     void setSelected(boolean x) {
-        if (!settled || supervisor) {
+        if (!settled || (sim.supervisor && sim.fullVersion)) {
             selected = x;
         }
     }
 
     void selectRect(Rectangle r) {
-        if (!settled || supervisor) {
+        if (!settled || (sim.supervisor && sim.fullVersion)) {
             selected = r.intersects(boundingBox);
         }
     }
@@ -1144,57 +1144,50 @@ public abstract class CircuitElm implements Editable {
         setPoints();
     }
 
-    boolean supervisor = true;
     boolean settled = false;
     boolean shorted = false;
     boolean opened = false;
     ShortWireElm shortWire;
     OpenSwitchElm openSwitch;
-    void shortFlipElement(CirSim cs, int mal) {
+    void shortFlipElement(int mal) {
         if (!shorted) {
             shortWire = new ShortWireElm(x, y, x2, y2, flags, null);
             shortWire.setPoints();
-            shortWire.settled = settled;
             shortWire.main = this;
-            cs.elmList.addElement(shortWire);
+            sim.elmList.addElement(shortWire);
             shorted = true;
             seed = 0;
         }
         else {
-            cs.elmList.removeElement(shortWire);
+            sim.elmList.removeElement(shortWire);
             shorted = false;
             seed = -1;
         }
     }
 
-    int times = (supervisor ? 10 : 1);
+    int times = (sim.supervisor ? 10 : 1);
     int visualPosition[] = new int[4];
     // open circuit
-    void openFlipElement(CirSim cs, int mal) {
-        CirSim.console("total: " + cs.elmList.size() + " location: " +
-                cs.locateElm(openSwitch));
+    void openFlipElement(int mal) {
+        CirSim.console("" + sim.fullVersion);
         if (!opened) {
             setVisualPosition();
             int swx2 = x2;
             int swy2 = y2;
             shorten();
             openSwitch = new OpenSwitchElm(x2, y2, swx2, swy2, flags);
-            openSwitch.settled = settled;
             openSwitch.main = this;
             openSwitch.setPoints();
-            cs.elmList.addElement(openSwitch);
+            sim.elmList.addElement(openSwitch);
             opened = true;
             seed = 1;
         }
         else {
             lengthen();
-            cs.elmList.removeElement(openSwitch);
+            sim.elmList.removeElement(openSwitch);
             opened = false;
             seed = -1;
         }
-        CirSim.console("total: " + cs.elmList.size() + " location: " +
-                cs.locateElm(openSwitch));
-        CirSim.console(cs.dumpCircuit());
     }
 
     void shorten() {
@@ -1215,19 +1208,19 @@ public abstract class CircuitElm implements Editable {
     }
 
     int seed = -1;
-    void malfunction(CirSim cs, int seed) {
+    void malfunction(int seed) {
         if (seed == 0) {
-            shortFlipElement(cs, seed);
+            shortFlipElement(seed);
         }
         else if (seed == 1) {
-            openFlipElement(cs, seed);
+            openFlipElement(seed);
         }
     }
 
     void drawOpened(Graphics g) {
         // now the position is moved, move back and draw
         int movingDelta = times * dsign;
-        if (!supervisor) {
+        if (!sim.supervisor || !sim.fullVersion) {
             if (dx != 0) {
                 x2 += movingDelta;
             } else {
@@ -1236,7 +1229,7 @@ public abstract class CircuitElm implements Editable {
             setPoints();
         }
         draw(g);
-        if (!supervisor) {
+        if (!sim.supervisor || !sim.fullVersion) {
             if (dx != 0) {
                 x2 -= movingDelta;
             } else {
