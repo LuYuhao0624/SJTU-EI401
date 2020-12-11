@@ -4,18 +4,19 @@ public class OpenWireElm extends WireElm {
     public OpenWireElm(int xa, int ya, int xb, int yb, int f,
                         StringTokenizer st) {
         super(xa, ya, xb, yb, f, st);
+        settled = true;
     }
 
     @Override
     void draw(Graphics g) {
-        if (supervisor) {
+        if (sim.supervisor && sim.fullVersion) {
             super.draw(g);
         }
     }
 
     @Override
     void initBoundingBox() {
-        if (supervisor) {
+        if (sim.supervisor && sim.fullVersion) {
             super.initBoundingBox();
         }
         else {
@@ -29,13 +30,17 @@ public class OpenWireElm extends WireElm {
     }
 
     @Override
-    void shortFlipElement(CirSim cs, int mal) {}
+    void shortFlipElement(int mal) {}
 
     @Override
-    void openFlipElement(CirSim cs, int mal) {}
+    void openFlipElement(int mal) {}
 
     @Override
     void setMouseElm(boolean v) {
         mouseElmRef = main;
+    }
+
+    void getInfo(String arr[]) {
+        arr[0] = "OW";
     }
 }

@@ -6,18 +6,19 @@ public class OpenSwitchElm extends SwitchElm{
         position = 1;
         momentary = false;
         posCount = 2;
+        settled = true;
     }
 
     @Override
     void draw(Graphics g) {
-        if (supervisor) {
+        if (sim.supervisor && sim.fullVersion) {
             super.draw(g);
         }
     }
 
     @Override
     void initBoundingBox() {
-        if (supervisor) {
+        if (sim.supervisor && sim.fullVersion) {
             super.initBoundingBox();
         }
         else {
@@ -31,14 +32,18 @@ public class OpenSwitchElm extends SwitchElm{
     }
 
     @Override
-    void shortFlipElement(CirSim cs, int mal) {}
+    void shortFlipElement(int mal) {}
 
     @Override
-    void openFlipElement(CirSim cs, int mal) {}
+    void openFlipElement(int mal) {}
 
     @Override
     void setMouseElm(boolean v) {
         mouseElmRef = main;
+    }
+
+    void getInfo(String arr[]) {
+        arr[0] = "OS";
     }
 
 }

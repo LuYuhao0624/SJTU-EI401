@@ -119,12 +119,12 @@ class WireElm extends CircuitElm {
     }
 
     @Override
-    void shortFlipElement(CirSim cs, int mal) {}
+    void shortFlipElement(int mal) {}
 
     @Override
-    void malfunction(CirSim cs, int seed) {
+    void malfunction(int seed) {
         if (seed == 1) {
-            openFlipElement(cs, seed);
+            openFlipElement(seed);
         }
     }
 

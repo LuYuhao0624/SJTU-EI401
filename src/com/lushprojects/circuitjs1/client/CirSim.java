@@ -93,7 +93,8 @@ import com.google.gwt.event.logical.shared.CloseHandler;
 public class CirSim implements MouseDownHandler, MouseMoveHandler, MouseUpHandler,
 ClickHandler, ContextMenuHandler, NativePreviewHandler, MouseOutHandler, MouseWheelHandler {
 
-    static final boolean fullVersion = false;
+    final boolean fullVersion = true;
+    boolean supervisor = true;
     
     Random random;
     Button resetButton;
@@ -2993,7 +2994,7 @@ ClickHandler, ContextMenuHandler, NativePreviewHandler, MouseOutHandler, MouseWh
         AudioInputElm.clearCache();  // to save memory
         for (int j = 0; j < elmList.size(); j++) {
             CircuitElm ce = getElm(j);
-            ce.malfunction(this, ce.seed);
+            ce.malfunction(ce.seed);
         }
     }
 
@@ -3245,11 +3246,7 @@ ClickHandler, ContextMenuHandler, NativePreviewHandler, MouseOutHandler, MouseWh
     }
 
     void dragPost(int x, int y) {
-//        if (!supervisor && !(mouseElm instanceof TestPointElm ||
-//                mouseElm instanceof ProbeElm)) {
-//            return;
-//        }
-        if (!fullVersion || (!supervisor && mouseElm.settled)) {
+        if ((!fullVersion || !supervisor) && mouseElm.settled) {
             return;
         }
         if (draggingPost == -1) {
@@ -3271,6 +3268,9 @@ ClickHandler, ContextMenuHandler, NativePreviewHandler, MouseOutHandler, MouseWh
     }
 
     void doSplit(CircuitElm ce) {
+        if (!fullVersion || !supervisor) {
+            return;
+        }
         int x = snapGrid(inverseTransformX(menuX));
         int y = snapGrid(inverseTransformY(menuY));
         if (ce == null || !(ce instanceof WireElm))
@@ -5125,39 +5125,34 @@ ClickHandler, ContextMenuHandler, NativePreviewHandler, MouseOutHandler, MouseWh
 
     void doShortFlip() {
         if (!(menuElm instanceof TransistorElm)) {
-            menuElm.shortFlipElement(this, 0);
+            menuElm.shortFlipElement(0);
             needAnalyze();
         }
     }
 
     void doOpenFlip() {
         if (!(menuElm instanceof TransistorElm)) {
-            menuElm.openFlipElement(this, 1);
+            menuElm.openFlipElement(1);
             needAnalyze();
         }
     }
 
     void doTransistorShortFlip(int mal) {
         if (menuElm instanceof TransistorElm) {
-            menuElm.shortFlipElement(this, mal);
+            menuElm.shortFlipElement(mal);
             needAnalyze();
         }
     }
 
     void doTransistorOpenFlip(int mal) {
         if (menuElm instanceof TransistorElm) {
-            menuElm.openFlipElement(this, mal);
+            menuElm.openFlipElement(mal);
             needAnalyze();
         }
     }
 
-    boolean supervisor = true;
     void doSupervisorFlip() {
         supervisor = !supervisor;
-        for (int i = 0; i != elmList.size(); i++) {
-            CircuitElm ce = getElm(i);
-            ce.supervisor = supervisor;
-        }
     }
 
 }
