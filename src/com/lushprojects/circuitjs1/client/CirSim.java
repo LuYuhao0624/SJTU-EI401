@@ -634,21 +634,17 @@ ClickHandler, ContextMenuHandler, NativePreviewHandler, MouseOutHandler, MouseWh
 
     public void composeMainMenu(MenuBar mainMenuBar) {
         mainMenuBar.addItem(getClassCheckItem(LS("Add Wire"), "WireElm"));
-        mainMenuBar.addItem(getClassCheckItem(LS("Add Resistor"), "ResistorElm"));
         if(!fullVersion) {
-            mainMenuBar.addItem(getClassCheckItem(LS("Add Capacitor"), "CapacitorElm"));
-            mainMenuBar.addItem(getClassCheckItem(LS("Add Inductor"), "InductorElm"));
-            mainMenuBar.addItem(getClassCheckItem(LS("Add Transistor (bipolar, NPN)"), "NTransistorElm"));
-            mainMenuBar.addItem(getClassCheckItem(LS("Add Transistor (bipolar, PNP)"), "PTransistorElm"));
+            mainMenuBar.addItem(getClassCheckItem(LS("Add Test Point"), "TestPointElm"));
+            mainMenuBar.addItem(getClassCheckItem(LS("Add Voltmeter/Scobe Probe"), "ProbeElm"));
+            mainMenuBar.addItem(getClassCheckItem(LS("Add Ammeter"), "AmmeterElm"));
             mainMenuBar.addItem(getClassCheckItem(LS("Add Switch"), "SwitchElm"));
             mainMenuBar.addItem(getClassCheckItem(LS("Add Voltage Source (2-terminal)"), "DCVoltageElm"));
             mainMenuBar.addItem(getClassCheckItem(LS("Add Current Source"), "CurrentElm"));
-            mainMenuBar.addItem(getClassCheckItem(LS("Add Voltmeter/Scobe Probe"), "ProbeElm"));
-            mainMenuBar.addItem(getClassCheckItem(LS("Add Ammeter"), "AmmeterElm"));
-            mainMenuBar.addItem(getClassCheckItem(LS("Add LED"), "LEDElm"));
             return;
         }
         MenuBar passMenuBar = new MenuBar(true);
+        passMenuBar.addItem(getClassCheckItem(LS("Add Resistor"), "ResistorElm"));
         passMenuBar.addItem(getClassCheckItem(LS("Add Capacitor"), "CapacitorElm"));
         passMenuBar.addItem(getClassCheckItem(LS("Add Capacitor (polarized)"), "PolarCapacitorElm"));
         passMenuBar.addItem(getClassCheckItem(LS("Add Inductor"), "InductorElm"));
@@ -2753,8 +2749,8 @@ ClickHandler, ContextMenuHandler, NativePreviewHandler, MouseOutHandler, MouseWh
         int stackptr = 0;
         currentMenuBar=new MenuBar(true);
         currentMenuBar.setAutoOpen(true);
-        //if(fullVersion)
-        menuBar.addItem(LS("Circuits"), currentMenuBar);
+        if(fullVersion)
+            menuBar.addItem(LS("Circuits"), currentMenuBar);
         stack[stackptr++] = currentMenuBar;
         int p;
         for (p = 0; p < len; ) {
