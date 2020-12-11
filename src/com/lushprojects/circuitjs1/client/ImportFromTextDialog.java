@@ -61,7 +61,6 @@ public class ImportFromTextDialog extends DialogBox {
                     flags |= CirSim.RC_SUBCIRCUITS | CirSim.RC_RETAIN;
                 if (s != null) {
                     sim.readCircuit(s, flags);
-                    sim.allowSave(false);
                 }
             }
         });

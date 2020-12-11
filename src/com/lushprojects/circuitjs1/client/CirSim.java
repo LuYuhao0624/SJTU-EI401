@@ -93,7 +93,7 @@ import com.google.gwt.event.logical.shared.CloseHandler;
 public class CirSim implements MouseDownHandler, MouseMoveHandler, MouseUpHandler,
 ClickHandler, ContextMenuHandler, NativePreviewHandler, MouseOutHandler, MouseWheelHandler {
 
-    static final boolean fullVersion = false;
+    static final boolean fullVersion = true;
     
     Random random;
     Button resetButton;
@@ -2367,49 +2367,9 @@ ClickHandler, ContextMenuHandler, NativePreviewHandler, MouseOutHandler, MouseWh
             t = 0;
     }
 
-    static void electronSaveAsCallback(String s) {
-        s = s.substring(s.lastIndexOf('/') + 1);
-        s = s.substring(s.lastIndexOf('\\') + 1);
-        theSim.setCircuitTitle(s);
-        theSim.allowSave(true);
-    }
-
-    static native void electronSaveAs(String dump) /*-{
-        $wnd.showSaveDialog().then(function (file) {
-            if (file.canceled)
-                return;
-            $wnd.saveFile(file, dump);
-            @com.lushprojects.circuitjs1.client.CirSim::electronSaveAsCallback(Ljava/lang/String;)(file.filePath.toString());
-        });
-    }-*/;
-
-    static native void electronSave(String dump) /*-{
-        $wnd.saveFile(null, dump);
-    }-*/;
-
-    static void electronOpenFileCallback(String text, String name) {
-        LoadFile.doLoadCallback(text, name);
-        theSim.allowSave(true);
-    }
-
-    static native void electronOpenFile() /*-{
-        $wnd.openFile(function (text, name) {
-            @com.lushprojects.circuitjs1.client.CirSim::electronOpenFileCallback(Ljava/lang/String;Ljava/lang/String;)(text, name);
-        });
-    }-*/;
-
     static native void toggleDevTools() /*-{
         $wnd.toggleDevTools();
     }-*/;
-
-    static native boolean isElectron() /*-{
-        return ($wnd.openFile != undefined);
-    }-*/;
-
-    void allowSave(boolean b) {
-        if (saveFileItem != null)
-            saveFileItem.setEnabled(b);
-    }
 
     public void menuPerformed(String menu, String item) {
         if (item=="about")
@@ -2877,7 +2837,6 @@ ClickHandler, ContextMenuHandler, NativePreviewHandler, MouseOutHandler, MouseWh
                     if (response.getStatusCode()==Response.SC_OK) {
                         String text = response.getText();
                         readCircuit(text, RC_KEEP_TITLE);
-                        allowSave(false);
                         unsavedChanges = false;
                     } else
                         GWT.log("Bad file server response:"+response.getStatusText() );

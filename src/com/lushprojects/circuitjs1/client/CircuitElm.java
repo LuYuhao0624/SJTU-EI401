@@ -224,7 +224,6 @@ public abstract class CircuitElm implements Editable {
     void delete() {
         if (mouseElmRef == this)
             mouseElmRef = null;
-        sim.deleteSliders(this);
     }
 
     void startIteration() {

@@ -76,7 +76,6 @@ public class ExportAsTextDialog extends DialogBox {
                 s = textArea.getText();
                 if (s != null) {
                     sim.readCircuit(s);
-                    sim.allowSave(false);
                 }
             }
         });

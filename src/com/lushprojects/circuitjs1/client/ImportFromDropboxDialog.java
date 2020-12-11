@@ -26,7 +26,6 @@ public class ImportFromDropboxDialog extends DialogBox {
     static public void doLoadCallback(String s) {
         sim.pushUndo();
         sim.readCircuit(s);
-        sim.allowSave(false);
     }
 
 
