@@ -58,38 +58,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="5bfd321d-7bad-499f-a573-47205b0f6d75" name="Default Changelist" comment="remove functionalities">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/AudioOutputElm.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/AudioOutputElm.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/CirSim$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/CirSim$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/CirSim$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/CirSim$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/CirSim$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/CirSim$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/CirSim$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/CirSim$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/CirSim$FindPathInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/CirSim$FindPathInfo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/CirSim$NodeMapEntry.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/CirSim$NodeMapEntry.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/CirSim$WireInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/CirSim$WireInfo.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/CirSim.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/CirSim.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/CircuitElm.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/CircuitElm.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/ExportAsTextDialog$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/ExportAsTextDialog$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/ExportAsTextDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/ExportAsTextDialog.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/ImportFromDropboxDialog$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/ImportFromDropboxDialog$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/ImportFromDropboxDialog$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/ImportFromDropboxDialog$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/ImportFromDropboxDialog$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/ImportFromDropboxDialog$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/ImportFromDropboxDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/ImportFromDropboxDialog.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/ImportFromTextDialog$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/ImportFromTextDialog$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/ImportFromTextDialog$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/ImportFromTextDialog$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/ImportFromTextDialog.class" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/WEB-INF/classes/com/lushprojects/circuitjs1/client/ImportFromTextDialog.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/circuitjs1/circuitjs1.devmode.js" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/circuitjs1/circuitjs1.devmode.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/circuitjs1/07997D510A3202F16F8738F36AFD0C5B.cache.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/circuitjs1/0A984478C099B9DB649CFCE80BDEFD9A.cache.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/circuitjs1/20C04BDE8142068F94CDFDBC91D76BA0.cache.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/circuitjs1/31819D75F7402A407F1FE5BA37873941.cache.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/circuitjs1/C89DFFDA0EA7CF526F24E8EB3C1173BC.cache.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/circuitjs1/circuitjs1.nocache.js" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/circuitjs1/circuitjs1.nocache.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/circuitjs1/compilation-mappings.txt" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/circuitjs1/compilation-mappings.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/circuitjs1/gwt/clean/clean.css" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/circuitjs1/gwt/clean/clean.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/circuitjs1/gwt/clean/clean_rtl.css" beforeDir="false" afterPath="$PROJECT_DIR$/classes/artifacts/circuitjs1_Web_exploded/circuitjs1/gwt/clean/clean_rtl.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/lushprojects/circuitjs1/client/AudioOutputElm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/lushprojects/circuitjs1/client/AudioOutputElm.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/lushprojects/circuitjs1/client/CirSim.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/lushprojects/circuitjs1/client/CirSim.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/lushprojects/circuitjs1/client/CircuitElm.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/lushprojects/circuitjs1/client/CircuitElm.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/lushprojects/circuitjs1/client/ExportAsTextDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/lushprojects/circuitjs1/client/ExportAsTextDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/lushprojects/circuitjs1/client/ImportFromDropboxDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/lushprojects/circuitjs1/client/ImportFromDropboxDialog.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/lushprojects/circuitjs1/client/ImportFromTextDialog.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/lushprojects/circuitjs1/client/ImportFromTextDialog.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -154,7 +132,7 @@
       <workItem from="1607403349499" duration="628000" />
       <workItem from="1607583558725" duration="8000" />
       <workItem from="1607585611367" duration="567000" />
-      <workItem from="1607652681044" duration="350000" />
+      <workItem from="1607652681044" duration="2674000" />
     </task>
     <task id="LOCAL-00001" summary="remove functionalities">
       <created>1607244096729</created>
@@ -225,77 +203,77 @@
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state x="539" y="226" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1607652724037" />
-    <state width="491" height="672" key="GridCell.Tab.0.bottom" timestamp="1607652927638">
+    <state width="491" height="672" key="GridCell.Tab.0.bottom" timestamp="1607659679410">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1324" height="149" key="GridCell.Tab.0.bottom/0.0.1366.696@0.0.1366.696" timestamp="1607393416612" />
-    <state width="491" height="672" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1607652927638" />
+    <state width="491" height="672" key="GridCell.Tab.0.bottom/0.0.1536.824@0.0.1536.824" timestamp="1607659679410" />
     <state width="1324" height="119" key="GridCell.Tab.0.bottom/0.23.1366.673@0.23.1366.673" timestamp="1607404203774" />
-    <state width="491" height="672" key="GridCell.Tab.0.center" timestamp="1607652927638">
+    <state width="491" height="672" key="GridCell.Tab.0.center" timestamp="1607659679410">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1324" height="149" key="GridCell.Tab.0.center/0.0.1366.696@0.0.1366.696" timestamp="1607393416611" />
-    <state width="491" height="672" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1607652927638" />
+    <state width="491" height="672" key="GridCell.Tab.0.center/0.0.1536.824@0.0.1536.824" timestamp="1607659679410" />
     <state width="1324" height="119" key="GridCell.Tab.0.center/0.23.1366.673@0.23.1366.673" timestamp="1607404203773" />
-    <state width="491" height="672" key="GridCell.Tab.0.left" timestamp="1607652927637">
+    <state width="491" height="672" key="GridCell.Tab.0.left" timestamp="1607659679410">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1324" height="149" key="GridCell.Tab.0.left/0.0.1366.696@0.0.1366.696" timestamp="1607393416609" />
-    <state width="491" height="672" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1607652927637" />
+    <state width="491" height="672" key="GridCell.Tab.0.left/0.0.1536.824@0.0.1536.824" timestamp="1607659679410" />
     <state width="1324" height="119" key="GridCell.Tab.0.left/0.23.1366.673@0.23.1366.673" timestamp="1607404203772" />
-    <state width="491" height="672" key="GridCell.Tab.0.right" timestamp="1607652927638">
+    <state width="491" height="672" key="GridCell.Tab.0.right" timestamp="1607659679410">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1324" height="149" key="GridCell.Tab.0.right/0.0.1366.696@0.0.1366.696" timestamp="1607393416612" />
-    <state width="491" height="672" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1607652927638" />
+    <state width="491" height="672" key="GridCell.Tab.0.right/0.0.1536.824@0.0.1536.824" timestamp="1607659679410" />
     <state width="1324" height="119" key="GridCell.Tab.0.right/0.23.1366.673@0.23.1366.673" timestamp="1607404203774" />
-    <state width="491" height="672" key="GridCell.Tab.1.bottom" timestamp="1607652927638">
+    <state width="491" height="672" key="GridCell.Tab.1.bottom" timestamp="1607659679410">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1324" height="149" key="GridCell.Tab.1.bottom/0.0.1366.696@0.0.1366.696" timestamp="1607393416616" />
-    <state width="491" height="672" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1607652927638" />
+    <state width="491" height="672" key="GridCell.Tab.1.bottom/0.0.1536.824@0.0.1536.824" timestamp="1607659679410" />
     <state width="1324" height="119" key="GridCell.Tab.1.bottom/0.23.1366.673@0.23.1366.673" timestamp="1607404203776" />
-    <state width="491" height="672" key="GridCell.Tab.1.center" timestamp="1607652927638">
+    <state width="491" height="672" key="GridCell.Tab.1.center" timestamp="1607659679410">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1324" height="149" key="GridCell.Tab.1.center/0.0.1366.696@0.0.1366.696" timestamp="1607393416614" />
-    <state width="491" height="672" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1607652927638" />
+    <state width="491" height="672" key="GridCell.Tab.1.center/0.0.1536.824@0.0.1536.824" timestamp="1607659679410" />
     <state width="1324" height="119" key="GridCell.Tab.1.center/0.23.1366.673@0.23.1366.673" timestamp="1607404203775" />
-    <state width="491" height="672" key="GridCell.Tab.1.left" timestamp="1607652927638">
+    <state width="491" height="672" key="GridCell.Tab.1.left" timestamp="1607659679410">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1324" height="149" key="GridCell.Tab.1.left/0.0.1366.696@0.0.1366.696" timestamp="1607393416613" />
-    <state width="491" height="672" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1607652927638" />
+    <state width="491" height="672" key="GridCell.Tab.1.left/0.0.1536.824@0.0.1536.824" timestamp="1607659679410" />
     <state width="1324" height="119" key="GridCell.Tab.1.left/0.23.1366.673@0.23.1366.673" timestamp="1607404203775" />
-    <state width="491" height="672" key="GridCell.Tab.1.right" timestamp="1607652927638">
+    <state width="491" height="672" key="GridCell.Tab.1.right" timestamp="1607659679410">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1324" height="149" key="GridCell.Tab.1.right/0.0.1366.696@0.0.1366.696" timestamp="1607393416615" />
-    <state width="491" height="672" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1607652927638" />
+    <state width="491" height="672" key="GridCell.Tab.1.right/0.0.1536.824@0.0.1536.824" timestamp="1607659679410" />
     <state width="1324" height="119" key="GridCell.Tab.1.right/0.23.1366.673@0.23.1366.673" timestamp="1607404203775" />
-    <state width="491" height="672" key="GridCell.Tab.2.bottom" timestamp="1607652927639">
+    <state width="491" height="672" key="GridCell.Tab.2.bottom" timestamp="1607659679410">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1324" height="149" key="GridCell.Tab.2.bottom/0.0.1366.696@0.0.1366.696" timestamp="1607393416619" />
-    <state width="491" height="672" key="GridCell.Tab.2.bottom/0.0.1536.824@0.0.1536.824" timestamp="1607652927639" />
+    <state width="491" height="672" key="GridCell.Tab.2.bottom/0.0.1536.824@0.0.1536.824" timestamp="1607659679410" />
     <state width="1324" height="119" key="GridCell.Tab.2.bottom/0.23.1366.673@0.23.1366.673" timestamp="1607404203778" />
-    <state width="491" height="672" key="GridCell.Tab.2.center" timestamp="1607652927639">
+    <state width="491" height="672" key="GridCell.Tab.2.center" timestamp="1607659679410">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1324" height="149" key="GridCell.Tab.2.center/0.0.1366.696@0.0.1366.696" timestamp="1607393416617" />
-    <state width="491" height="672" key="GridCell.Tab.2.center/0.0.1536.824@0.0.1536.824" timestamp="1607652927639" />
+    <state width="491" height="672" key="GridCell.Tab.2.center/0.0.1536.824@0.0.1536.824" timestamp="1607659679410" />
     <state width="1324" height="119" key="GridCell.Tab.2.center/0.23.1366.673@0.23.1366.673" timestamp="1607404203777" />
-    <state width="491" height="672" key="GridCell.Tab.2.left" timestamp="1607652927639">
+    <state width="491" height="672" key="GridCell.Tab.2.left" timestamp="1607659679410">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1324" height="149" key="GridCell.Tab.2.left/0.0.1366.696@0.0.1366.696" timestamp="1607393416616" />
-    <state width="491" height="672" key="GridCell.Tab.2.left/0.0.1536.824@0.0.1536.824" timestamp="1607652927639" />
+    <state width="491" height="672" key="GridCell.Tab.2.left/0.0.1536.824@0.0.1536.824" timestamp="1607659679410" />
     <state width="1324" height="119" key="GridCell.Tab.2.left/0.23.1366.673@0.23.1366.673" timestamp="1607404203776" />
-    <state width="491" height="672" key="GridCell.Tab.2.right" timestamp="1607652927639">
+    <state width="491" height="672" key="GridCell.Tab.2.right" timestamp="1607659679410">
       <screen x="0" y="0" width="1536" height="824" />
     </state>
     <state width="1324" height="149" key="GridCell.Tab.2.right/0.0.1366.696@0.0.1366.696" timestamp="1607393416618" />
-    <state width="491" height="672" key="GridCell.Tab.2.right/0.0.1536.824@0.0.1536.824" timestamp="1607652927639" />
+    <state width="491" height="672" key="GridCell.Tab.2.right/0.0.1536.824@0.0.1536.824" timestamp="1607659679410" />
     <state width="1324" height="119" key="GridCell.Tab.2.right/0.23.1366.673@0.23.1366.673" timestamp="1607404203777" />
     <state x="565" y="132" key="RollbackChangesDialog" timestamp="1607592897459">
       <screen x="0" y="0" width="1536" height="824" />

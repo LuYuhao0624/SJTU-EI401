@@ -514,46 +514,46 @@ ClickHandler, ContextMenuHandler, NativePreviewHandler, MouseOutHandler, MouseWh
 	        elmMenuBar.addItem(elmEditMenuItem = new MenuItem(LS("Edit..."),new MyCommand("elm","edit")));
             elmMenuBar.addItem(elmFlipMenuItem = new MenuItem(LS("Swap Terminals"), new MyCommand("elm", "flip")));
             elmMenuBar.addItem(elmSplitMenuItem = menuItemWithShortcut("", LS("Split Wire"), LS(ctrlMetaKey + "-click"), new MyCommand("elm", "split")));
+            elmMenuBar.addItem((elmFlipMenuItem = new MenuItem(
+                    LS("Short/Un-short"), new MyCommand("elm", "shortflip")
+            )));
+            elmMenuBar.addItem((elmFlipMenuItem = new MenuItem(
+                    LS("Open/Close"), new MyCommand("elm", "openflip")
+            )));
+            elmMenuBar.addItem((elmFlipMenuItem = new MenuItem(
+                    LS("Supervisor"), new MyCommand("elm", "supervisor")
+            )));
+            elmMenuBar.addItem((elmFlipMenuItem = new MenuItem(
+                    LS("Redundant"), new MyCommand("elm", "redundant")
+            )));
+
+            MenuBar transistorBar = new MenuBar(true);
+            transistorBar.addItem(new MenuItem(
+                    LS("Short BC"), new MyCommand("elm", "shortbc")
+            ));
+            transistorBar.addItem(new MenuItem(
+                    LS("Short CE"), new MyCommand("elm", "shortce")
+            ));
+            transistorBar.addItem(new MenuItem(
+                    LS("Short EB"), new MyCommand("elm", "shorteb")
+            ));
+            transistorBar.addItem(new MenuItem(
+                    LS("Open B"), new MyCommand("elm", "openb")
+            ));
+            transistorBar.addItem(new MenuItem(
+                    LS("Open C"), new MyCommand("elm", "openc")
+            ));
+            transistorBar.addItem(new MenuItem(
+                    LS("Open E"), new MyCommand("elm", "opene")
+            ));
+
+            elmMenuBar.addItem(
+                    SafeHtmlUtils.fromTrustedString(
+                            CheckboxMenuItem.checkBoxHtml +
+                                    LS("Transistor")
+                    ), transistorBar
+            );
         }
-        elmMenuBar.addItem((elmFlipMenuItem = new MenuItem(
-                LS("Short/Un-short"), new MyCommand("elm", "shortflip")
-        )));
-        elmMenuBar.addItem((elmFlipMenuItem = new MenuItem(
-                LS("Open/Close"), new MyCommand("elm", "openflip")
-        )));
-        elmMenuBar.addItem((elmFlipMenuItem = new MenuItem(
-                LS("Supervisor"), new MyCommand("elm", "supervisor")
-        )));
-        elmMenuBar.addItem((elmFlipMenuItem = new MenuItem(
-                LS("Redundant"), new MyCommand("elm", "redundant")
-        )));
-
-        MenuBar transistorBar = new MenuBar(true);
-        transistorBar.addItem(new MenuItem(
-                LS("Short BC"), new MyCommand("elm", "shortbc")
-        ));
-        transistorBar.addItem(new MenuItem(
-                LS("Short CE"), new MyCommand("elm", "shortce")
-        ));
-        transistorBar.addItem(new MenuItem(
-                LS("Short EB"), new MyCommand("elm", "shorteb")
-        ));
-        transistorBar.addItem(new MenuItem(
-                LS("Open B"), new MyCommand("elm", "openb")
-        ));
-        transistorBar.addItem(new MenuItem(
-                LS("Open C"), new MyCommand("elm", "openc")
-        ));
-        transistorBar.addItem(new MenuItem(
-                LS("Open E"), new MyCommand("elm", "opene")
-        ));
-
-        elmMenuBar.addItem(
-                SafeHtmlUtils.fromTrustedString(
-                        CheckboxMenuItem.checkBoxHtml +
-                                LS("Transistor")
-                ), transistorBar
-        );
 
         scopePopupMenu = new ScopePopupMenu();
 
@@ -2444,24 +2444,26 @@ ClickHandler, ContextMenuHandler, NativePreviewHandler, MouseOutHandler, MouseWh
         if (item=="selectAll")
             doSelectAll();
 
-        if (item.equals("shortflip"))
-            doShortFlip();
-        if (item.equals("openflip"))
-            doOpenFlip();
-        if (item.equals("supervisor"))
-            doSupervisorFlip();
-        if (item.equals("shortbc"))
-            doTransistorShortFlip(0);
-        if (item.equals("shortce"))
-            doTransistorShortFlip(1);
-        if (item.equals("shorteb"))
-            doTransistorShortFlip(2);
-        if (item.equals("openb"))
-            doTransistorOpenFlip(3);
-        if (item.equals("openc"))
-            doTransistorOpenFlip(4);
-        if (item.equals("opene"))
-            doTransistorOpenFlip(5);
+        if (fullVersion) {
+            if (item.equals("shortflip"))
+                doShortFlip();
+            if (item.equals("openflip"))
+                doOpenFlip();
+            if (item.equals("supervisor"))
+                doSupervisorFlip();
+            if (item.equals("shortbc"))
+                doTransistorShortFlip(0);
+            if (item.equals("shortce"))
+                doTransistorShortFlip(1);
+            if (item.equals("shorteb"))
+                doTransistorShortFlip(2);
+            if (item.equals("openb"))
+                doTransistorOpenFlip(3);
+            if (item.equals("openc"))
+                doTransistorOpenFlip(4);
+            if (item.equals("opene"))
+                doTransistorOpenFlip(5);
+        }
 
         if (item=="centrecircuit") {
             pushUndo();
@@ -3246,7 +3248,7 @@ ClickHandler, ContextMenuHandler, NativePreviewHandler, MouseOutHandler, MouseWh
 //                mouseElm instanceof ProbeElm)) {
 //            return;
 //        }
-        if (mouseElm.settled) {
+        if (!fullVersion || (!supervisor && mouseElm.settled)) {
             return;
         }
         if (draggingPost == -1) {
