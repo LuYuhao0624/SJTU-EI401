@@ -93,14 +93,14 @@ import com.google.gwt.event.logical.shared.CloseHandler;
 public class CirSim implements MouseDownHandler, MouseMoveHandler, MouseUpHandler,
 ClickHandler, ContextMenuHandler, NativePreviewHandler, MouseOutHandler, MouseWheelHandler {
 
-    static final boolean fullVersion = true;
+    static final boolean fullVersion = false;
     
     Random random;
     Button resetButton;
     Button runStopButton;
     Button dumpMatrixButton;
     MenuItem aboutItem;
-    MenuItem importFromLocalFileItem, importFromTextItem, exportAsTextItem, recoverItem;
+    MenuItem importFromLocalFileItem, importFromTextItem, exportAsTextItem, exportAsUrlItem, recoverItem;
     MenuItem undoItem, redoItem, cutItem, copyItem, pasteItem, selectAllItem;
     CheckboxMenuItem dotsCheckItem;
     CheckboxMenuItem voltsCheckItem;
@@ -358,12 +358,14 @@ ClickHandler, ContextMenuHandler, NativePreviewHandler, MouseOutHandler, MouseWh
             importFromLocalFileItem = iconMenuItem("folder", "Open File...", new MyCommand("file","importfromlocalfile"));
             importFromLocalFileItem.setEnabled(LoadFile.isSupported());
             fileMenuBar.addItem(importFromLocalFileItem);
-            importFromTextItem = iconMenuItem("doc-text", "Import From Text...", new MyCommand("file","importfromtext"));
-            fileMenuBar.addItem(importFromTextItem);
+            exportAsUrlItem = iconMenuItem("export", "Export As Link...", new MyCommand("file","exportasurl"));
+            fileMenuBar.addItem(exportAsUrlItem);
             exportAsTextItem = iconMenuItem("export", "Export As Text...", new MyCommand("file","exportastext"));
             fileMenuBar.addItem(exportAsTextItem);
         }
         fileMenuBar.addItem(iconMenuItem("export", "Export As Image...", new MyCommand("file","exportasimage")));
+        importFromTextItem = iconMenuItem("doc-text", "Import From Text...", new MyCommand("file","importfromtext"));
+        fileMenuBar.addItem(importFromTextItem);
         fileMenuBar.addSeparator();
         aboutItem = iconMenuItem("info-circled", "About...", (Command)null);
         aboutItem.setScheduledCommand(new MyCommand("file","about"));
@@ -763,7 +765,6 @@ ClickHandler, ContextMenuHandler, NativePreviewHandler, MouseOutHandler, MouseWh
         chipMenuBar.addItem(getClassCheckItem(LS("Add Counter"), "CounterElm"));
         chipMenuBar.addItem(getClassCheckItem(LS("Add Ring Counter"), "DecadeElm"));
         chipMenuBar.addItem(getClassCheckItem(LS("Add Latch"), "LatchElm"));
-        //chipMenuBar.addItem(getClassCheckItem("Add Static RAM", "SRAMElm"));
         chipMenuBar.addItem(getClassCheckItem(LS("Add Sequence generator"), "SeqGenElm"));
         chipMenuBar.addItem(getClassCheckItem(LS("Add Full Adder"), "FullAdderElm"));
         chipMenuBar.addItem(getClassCheckItem(LS("Add Half Adder"), "HalfAdderElm"));
@@ -2752,8 +2753,8 @@ ClickHandler, ContextMenuHandler, NativePreviewHandler, MouseOutHandler, MouseWh
         int stackptr = 0;
         currentMenuBar=new MenuBar(true);
         currentMenuBar.setAutoOpen(true);
-        if(fullVersion)
-            menuBar.addItem(LS("Circuits"), currentMenuBar);
+        //if(fullVersion)
+        menuBar.addItem(LS("Circuits"), currentMenuBar);
         stack[stackptr++] = currentMenuBar;
         int p;
         for (p = 0; p < len; ) {
