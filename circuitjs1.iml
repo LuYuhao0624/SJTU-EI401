@@ -23,7 +23,7 @@
       <configuration>
         <setting name="compilerMaxHeapSize" value="1024" />
         <setting name="gwtScriptOutputStyle" value="DETAILED" />
-        <setting name="gwtSdkUrl" value="file://$MODULE_DIR$/../../../Tools/gwt-2.9.0" />
+        <setting name="gwtSdkUrl" value="file:///usr/local/gwt-2.9.0" />
         <setting name="webFacet" value="Web" />
       </configuration>
     </facet>
